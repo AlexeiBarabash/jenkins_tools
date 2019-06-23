@@ -4,6 +4,7 @@ def call() {
         textWithColor('ENV param is must')
         throw new Exception('ENV param is must')
     }
+    
     SERVERS = []
     DOCKER_REPO = ""
 
@@ -27,11 +28,11 @@ def call() {
         DOCKER_REPO = DOCKER_REPO_PROD
     }
             
+    BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
+
     CONTAINER_NAME = "${CONTAINER_NAME}-${ENV}"
     CONTAINER_VERSION = "${(params.TAG_OR_BRANCH == null) ? BUILD_NUMBER : BRANCH_TO_CLONE}"
     CONTAINER_NAME_REPO = "${DOCKER_REPO}/${CONTAINER_NAME}:${CONTAINER_VERSION}"
-    GIT_DEFUALT_BRANCH = GIT_BRANCH ?: GIT_DEFUALT_BRANCH
-    BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_DEFUALT_BRANCH
 
     env.CONTAINER_NAME = CONTAINER_NAME
     env.CONTAINER_VERSION = CONTAINER_VERSION
