@@ -1,9 +1,9 @@
 #!/usr/bin/env groovy
-def call(applyFilename) {
+def call() {
     textWithColor("Deploy Container With K8s")
     kubernetesDeploy(
         kubeconfigId: 'int_kubeconfig',
-        configs: applyFilename,
+        configs: env.K8S_APPLY_FILES_GLOB,
         enableConfigSubstitution: true
     )
     textWithColor("Finished Deploy Container")
