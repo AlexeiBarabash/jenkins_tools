@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call(sshServer, sshUser = 'deploy') {
     textWithColor("Deploy Container To - ${sshUser}@${sshServer}")
-    scriptFile = "./script.sh"
+    def scriptFile = "./script.sh"
     sh """
         echo '
         docker pull ${CONTAINER_NAME_REPO} || exit 1
