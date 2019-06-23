@@ -8,21 +8,21 @@ def call() {
     DOCKER_REPO = ""
 
     if(ENV == 'integration') {
-        SERVERS = SERVERS_INTEGRATION.split(';')
+        SERVERS = SERVERS_INTEGRATION
         CONTAINER_RUN_ARGS += " ${CONTAINER_RUN_ARGS_INTEGRATION} "
         DOCKER_REPO = DOCKER_REPO_INTEGRATION
     }
     else if(ENV == 'qa') {
-        SERVERS = SERVERS_QA.split(';')
+        SERVERS = SERVERS_QA
         CONTAINER_RUN_ARGS += " ${CONTAINER_RUN_ARGS_QA} "
         DOCKER_REPO = DOCKER_REPO_QA
     }
     else if(ENV == 'stage') {
-        SERVERS = SERVERS_STAGE.split(';')
+        SERVERS = SERVERS_STAGE
         CONTAINER_RUN_ARGS += " ${CONTAINER_RUN_ARGS_STAGE} "
         DOCKER_REPO = DOCKER_REPO_STAGE
     } else if(ENV == 'production') {
-        SERVERS = SERVERS_PROD.split(';')
+        SERVERS = SERVERS_PROD
         CONTAINER_RUN_ARGS += " ${CONTAINER_RUN_ARGS_PROD} "
         DOCKER_REPO = DOCKER_REPO_PROD
     }
