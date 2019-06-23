@@ -8,8 +8,7 @@ def call() {
     // SERVERS = []
     textWithColor("Config")
     echo config
-    echo "-------------- Config -------------------------"
-
+    echo config["DOCKER_REPO"]
     echo config.DOCKER_REPO
     DOCKER_REPO = config.DOCKER_REPO
     BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
