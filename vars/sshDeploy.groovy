@@ -4,11 +4,11 @@ def call(sshServer, sshUser = 'deploy') {
     def scriptFile = "./script.sh"
     sh """
         echo '
-        docker pull ${CONTAINER_NAME_REPO} || exit 1
-        docker stop ${CONTAINER_NAME} || true
-        docker rm ${CONTAINER_NAME} || true
+        docker pull ${env.CONTAINER_NAME_REPO} || exit 1
+        docker stop ${env.CONTAINER_NAME} || true
+        docker rm ${env.CONTAINER_NAME} || true
         echo 'docker run command'
-        docker run ${CONTAINER_RUN_ARGS} --name ${CONTAINER_NAME} ${CONTAINER_NAME_REPO} || exit 1
+        docker run ${env.CONTAINER_RUN_ARGS} --name ${env.CONTAINER_NAME} ${env.CONTAINER_NAME_REPO} || exit 1
         docker ps -a
         ' > ${scriptFile}
     """
