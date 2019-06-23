@@ -6,7 +6,7 @@ def call() {
         throw new Exception('ENV param is must')
     }
     
-    textWithColor("Config")
+    textWithColor("Config ${ENV}")
     CONFIG = readJSON(text: CONFIG)
     CONFIG = CONFIG["${ENV}"]
     writeJSON file: 'myConfig.json', json: CONFIG
