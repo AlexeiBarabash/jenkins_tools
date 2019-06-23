@@ -39,5 +39,5 @@ def call() {
     env.ENV = ENV
     env.BUILDER_NAME = BUILDER_NAME
     env.BRANCH_TO_CLONE = BRANCH_TO_CLONE
-    return env
+    return this
 }
