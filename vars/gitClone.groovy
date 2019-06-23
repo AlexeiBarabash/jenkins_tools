@@ -1,7 +1,6 @@
 #!/usr/bin/env groovy
 def call() {
     textWithColor("Git Clone - ${BRANCH_TO_CLONE}")
-    GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
     checkout([$class: 'GitSCM',
         branches: [[name: BRANCH_TO_CLONE]],
         doGenerateSubmoduleConfigurations: false,
