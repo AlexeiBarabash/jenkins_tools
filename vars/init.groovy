@@ -8,6 +8,7 @@ def call() {
     // SERVERS = []
     textWithColor("Config")
     echo config
+    config = readJSON(text:config))
     echo config["DOCKER_REPO"]
     echo config.DOCKER_REPO
     DOCKER_REPO = config.DOCKER_REPO
