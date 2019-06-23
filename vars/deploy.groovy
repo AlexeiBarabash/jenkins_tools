@@ -1,8 +1,8 @@
 def call() {
     textWithColor("Deploying ${ENV}")
-    for(server in SERVERS.split(';')) {
-        if((fileExists(env.K8S_APPLY_FILE))) {
-            deploy_k8s(env.K8S_APPLY_FILE)
+    for(server in SERVERS) {
+        if((fileExists(env.K8S_APPLY_FILES_GLOB))) {
+            deploy_k8s()
         } else {
             sshDeploy(server)
         }
