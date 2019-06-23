@@ -21,4 +21,6 @@ def call() {
     env.CONTAINER_RUN_ARGS = config.CONTAINER_RUN_ARGS
     env.SERVERS = config.SERVERS
     env.BRANCH_TO_CLONE = BRANCH_TO_CLONE
+    env.GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
+
 }
