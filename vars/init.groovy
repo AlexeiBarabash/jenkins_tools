@@ -5,8 +5,8 @@ def call() {
         throw new Exception('ENV param is must')
     }
     
-    SERVERS = []
-    DOCKER_REPO = ""
+    // SERVERS = []
+    // DOCKER_REPO = ""
 
     // if(ENV == 'integration') {
     //     SERVERS = SERVERS_INTEGRATION
