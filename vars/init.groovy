@@ -9,7 +9,8 @@ def call() {
     textWithColor("Config")
     CONFIG = readJSON(text:CONFIG)
     CONFIG = CONFIG["${ENV}"]
-    writeJSON(CONFIG, "myConfig.json")
+    writeJSON file: 'myConfig.json', json: CONFIG
+
     sh "cat myConfig.json"
     
     BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
