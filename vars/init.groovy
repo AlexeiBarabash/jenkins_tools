@@ -6,6 +6,7 @@ def call() {
     }
     
     // SERVERS = []
+    echo config
     DOCKER_REPO = config.DOCKER_REPO
     BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
     // if(ENV == 'integration') {
