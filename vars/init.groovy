@@ -8,7 +8,7 @@ def call() {
     
     textWithColor("Config")
     env.CONFIG = readJSON(text: env.CONFIG)
-    env.CONFIG = CONFIG["${env.ENV}"]
+    env.CONFIG = env.CONFIG["${env.ENV}"]
     writeJSON file: 'myConfig.json', json: env.CONFIG
     sh "cat myConfig.json"
     
