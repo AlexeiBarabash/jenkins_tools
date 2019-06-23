@@ -1,13 +1,16 @@
 #!/usr/bin/env groovy
 def call() {
+    textWithColor("Init")
     if(ENV == null || ENV == '') {
         textWithColor('ENV param is must')
         throw new Exception('ENV param is must')
     }
     
     textWithColor("Config")
-    echo config
     config = readJSON(text:config)
+    config = config["${ENV}"]
+    echo config
+    
     BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
 
     CONTAINER_NAME = "${CONTAINER_NAME}-${ENV}"
