@@ -15,6 +15,7 @@ def call() {
     env.CONTAINER_RUN_ARGS = CONFIG.CONTAINER_RUN_ARGS
     env.SERVERS = CONFIG.SERVERS
     env.DOCKER_REPO = CONFIG.DOCKER_REPO
+    env.K8S_APPLY_FILE = CONFIG.K8S_APPLY_FILE
 
     env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
     env.GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
