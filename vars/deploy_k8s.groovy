@@ -2,7 +2,7 @@
 def call() {
     textWithColor("Deploy Container With K8s")
     kubernetesDeploy(
-        kubeconfigId: 'int_kubeconfig',
+        kubeconfigId: env.KUBE_CONFIG_ID,
         configs: env.K8S_APPLY_FILES_GLOB,
         enableConfigSubstitution: true
     )
