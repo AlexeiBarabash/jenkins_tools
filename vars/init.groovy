@@ -5,7 +5,6 @@ def call() {
         throw new Exception('ENV param is must')
     }
     
-    // SERVERS = []
     textWithColor("Config")
     echo config
     config = readJSON(text:config)
