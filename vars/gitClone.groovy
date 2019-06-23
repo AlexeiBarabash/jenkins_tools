@@ -2,8 +2,6 @@
 def call() {
     textWithColor("Git Clone - ${BRANCH_TO_CLONE}")
     GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
-    GIT_DEFUALT_BRANCH = GIT_BRANCH ?: GIT_DEFUALT_BRANCH
-    BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_DEFUALT_BRANCH
     checkout([$class: 'GitSCM',
         branches: [[name: BRANCH_TO_CLONE]],
         doGenerateSubmoduleConfigurations: false,
