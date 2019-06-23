@@ -23,7 +23,7 @@ def call() {
         env.BUILDER_NAME = (BUILD_USER == '' || BUILD_USER == null || BUILD_USER == 'SCMTrigger') ? gitlabUserName : BUILD_USER
     }
     
-    env.CONTAINER_NAME = "${env.CONTAINER_NAME}-${ENV}"
+    env.CONTAINER_NAME = "${env.CONTAINER_NAME}-${env.ENV}"
     env.CONTAINER_VERSION = "${(params.TAG_OR_BRANCH == null) ? BUILD_NUMBER : env.BRANCH_TO_CLONE}"
     env.CONTAINER_NAME_REPO = "${CONFIG.DOCKER_REPO}/${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
 }
