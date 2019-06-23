@@ -20,13 +20,13 @@ def call() {
     SERVERS = []
     try {
         if(ENV == 'production') {
-            SERVERS = SERVERS_PROD.split(';')
+            SERVERS = SERVERS_PROD
             CONTAINER_RUN_ARGS += " " + (CONTAINER_RUN_ARGS_PROD ?: '') + " "
         } else if(ENV == 'stage') {
-            SERVERS = SERVERS_STAGE.split(';')
+            SERVERS = SERVERS_STAGE
             CONTAINER_RUN_ARGS += " " + (CONTAINER_RUN_ARGS_STAGE ?: '') + " "
         } else if(ENV == 'integration') {
-            SERVERS = SERVERS_INTEGRATION.split(';')
+            SERVERS = SERVERS_INTEGRATION
             CONTAINER_RUN_ARGS += " " + (CONTAINER_RUN_ARGS_INTEGRATION ?: '') + " "
         }
       } catch(Exception ex) {}
