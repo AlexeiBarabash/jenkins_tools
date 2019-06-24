@@ -18,6 +18,8 @@ filename: vars/init.groovy
 file code:
 
 ```
+#!/usr/bin/env groovy
+
 def call(someArg) {
     echo "init func from shared lib"
     echo someArg
