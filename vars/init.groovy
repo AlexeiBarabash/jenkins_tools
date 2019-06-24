@@ -5,6 +5,18 @@ def call() {
         textWithColor('ENV param is must')
         throw new Exception('ENV param is must')
     }
+
+    env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
+    if(env.BRANCH_TO_CLONE == null || env.BRANCH_TO_CLONE == '') {
+        textWithColor('env.BRANCH_TO_CLONE param is must')
+        throw new Exception('env.BRANCH_TO_CLONE param is must')
+    }
+
+    env.GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
+    if(env.GIT_REPO == null || env.GIT_REPO == '') {
+        textWithColor('env.GIT_REPO param is must')
+        throw new Exception('env.GIT_REPO param is must')
+    }
     
     textWithColor("Config ${ENV}")
     CONFIG = readJSON(text: CONFIG)
@@ -17,10 +29,7 @@ def call() {
     env.DOCKER_REPO = CONFIG.DOCKER_REPO
     env.K8S_APPLY_FILES_GLOB = CONFIG.K8S_APPLY_FILES_GLOB
     env.KUBE_CONFIG_ID = CONFIG.KUBE_CONFIG_ID
-    
-    env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
-    env.GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
-    
+      
     wrap([$class: 'BuildUser']) {
         env.BUILDER_NAME = (BUILD_USER == '' || BUILD_USER == null || BUILD_USER == 'SCMTrigger') ? gitlabUserName : BUILD_USER
     }
