@@ -12,6 +12,7 @@ def call() {
         kubectl apply -f ${env.K8S_APPLY_FILES_GLOB}
         ' > ./script.sh
     """
+    sh "./script.sh"
 
     } else {
         kubernetesDeploy(
