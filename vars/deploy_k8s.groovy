@@ -2,11 +2,9 @@
 def call() {
     textWithColor("Deploy Container With K8s")
     if(env.KUBE_CONFIG_ID == "kubeconfig_codeoasis") {
-        kubernetesDeploy(
-            kubeConfig: path:"/root/.kube/config.yaml",
-            configs: env.K8S_APPLY_FILES_GLOB,
-            enableConfigSubstitution: true
-        )
+        KUBCONFIG = "/root/.kube/config.yaml"
+        sh 'export KUBCONFIG="/root/.kube/config.yaml"'
+        sh "kubectl apply -f " + env.K8S_APPLY_FILES_GLOB
     } else {
         kubernetesDeploy(
             kubeconfigId: env.KUBE_CONFIG_ID,
