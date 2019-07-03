@@ -8,7 +8,7 @@ def call() {
         ls  /var/lib/jenkins/k8sConfig/config.yaml
         kubectl --kubeconfig="/var/lib/jenkins/k8sConfig/config.yaml" config view
         kubectl --kubeconfig="/var/lib/jenkins/k8sConfig/config.yaml" get nodes
-        kubectl --kubeconfig="/var/lib/jenkins/k8sConfig/config.yaml" apply -f ${env.K8S_APPLY_FILES_GLOB}
+        envsubst < ${env.K8S_APPLY_FILES_GLOB} | kubectl --kubeconfig="/var/lib/jenkins/k8sConfig/config.yaml" apply -f -
         ' > ./script.sh
     """
     sh "chmod 777 ./script.sh"
