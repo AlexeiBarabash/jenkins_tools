@@ -4,13 +4,14 @@ def call() {
     if(env.KUBE_CONFIG_ID == "kubeconfig_codeoasis") {
     sh """
     echo '
-        export KUBCONFIG=" /var/lib/jenkins/k8sConfig/config.yaml"
+        export KUBCONFIG="/var/lib/jenkins/k8sConfig/config.yaml"
         ls  /var/lib/jenkins/k8sConfig/config.yaml
         kubectl config view
         kubectl get nodes
         kubectl apply -f ${env.K8S_APPLY_FILES_GLOB}
         ' > ./script.sh
     """
+    sh "chmod 777 ./script.sh"
     sh "./script.sh"
 
     } else {
