@@ -4,6 +4,8 @@ def call() {
     if(env.KUBE_CONFIG_ID == "kubeconfig_codeoasis") {
         KUBCONFIG = "/root/.kube/config.yaml"
         sh 'export KUBCONFIG="/root/.kube/config.yaml"'
+        sh "kubectl config view"
+        sh "kubectl get nodes"
         sh "kubectl apply -f " + env.K8S_APPLY_FILES_GLOB
     } else {
         kubernetesDeploy(
