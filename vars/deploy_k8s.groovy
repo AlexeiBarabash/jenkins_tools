@@ -6,7 +6,6 @@ def call() {
     echo '
         export KUBCONFIG=" /var/lib/jenkins/k8sConfig/config.yaml"
         ls  /var/lib/jenkins/k8sConfig/config.yaml
-        echo $KUBCONFIG
         kubectl config view
         kubectl get nodes
         kubectl apply -f ${env.K8S_APPLY_FILES_GLOB}
