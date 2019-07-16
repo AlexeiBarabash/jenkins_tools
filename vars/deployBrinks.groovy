@@ -6,7 +6,7 @@ def call(sshUser = 'deploy') {
         echo '
         mkdir -p ./tempDir
         cd ./tempDir
-        git clone ${GIT_URL} .
+        git clone ${env.GIT_REPO} .
         git reset --hard
         git fetch --all
         git checkout ${env.BRANCH_TO_CLONE}
