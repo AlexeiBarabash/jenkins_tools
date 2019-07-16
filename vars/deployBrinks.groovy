@@ -5,7 +5,6 @@ def call(sshUser = 'deploy') {
         sh """
         echo '
         cd ./${CONTAINER_NAME}
-        git clone ${env.GIT_REPO} .
         git reset --hard
         git fetch --all
         git checkout ${env.BRANCH_TO_CLONE}
@@ -16,8 +15,10 @@ def call(sshUser = 'deploy') {
         docker build -t ${env.CONTAINER_NAME} .
         docker stop ${env.CONTAINER_NAME} || true
         docker rm ${env.CONTAINER_NAME} || true
-        echo 'docker run command'
-        docker run ${env.CONTAINER_RUN_ARGS} --name ${env.CONTAINER_NAME} ${env.CONTAINER_NAME} || exit 1
+        echo "\033[44m --------------------------------------- \033[0m"
+        echo "\033[44m docker run command \033[0m"
+        echo "\033[44m --------------------------------------- \033[0m"
+        docker run -d --privileged --cap-add SYS_ADMIN --cap-add DAC_READ_SEARCH --name ${env.CONTAINER_NAME} ${env.CONTAINER_NAME} || exit 1
         docker ps -a
             ' > ${scriptFile}
         """
