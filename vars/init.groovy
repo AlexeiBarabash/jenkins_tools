@@ -34,7 +34,7 @@ def call() {
         wrap([$class: 'BuildUser']) {
             env.BUILDER_NAME = (BUILD_USER == '' || BUILD_USER == null || BUILD_USER == 'SCMTrigger') ? gitlabUserName : BUILD_USER
         }
-    } catch {
+    } catch(Exception ex) {
         env.BUILDER_NAME = 'unknown'
     }
 
