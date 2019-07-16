@@ -4,6 +4,9 @@ def call(sshUser = 'deploy') {
         def scriptFile = "./script.sh"
         sh """
         echo '
+        mkdir -p /tempDir
+        cd /tempDir
+        git clone ${GIT_URL} .
         git reset --hard
         git fetch --all
         git checkout ${env.BRANCH_TO_CLONE}
@@ -17,6 +20,7 @@ def call(sshUser = 'deploy') {
         echo 'docker run command'
         docker run ${env.CONTAINER_RUN_ARGS} --name ${env.CONTAINER_NAME} ${env.CONTAINER_NAME} || exit 1
         docker ps -a
+        rm -rf /tempDir || true
             ' > ${scriptFile}
         """
         sh "ssh ${sshUser}@${sshServer} bash -s < ${scriptFile}"
