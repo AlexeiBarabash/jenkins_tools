@@ -1,19 +1,19 @@
 #!/usr/bin/env groovy
 def call() {
     textWithColor("Init")
-    if(ENV == null || ENV == '') {
+    if(isEmpty(ENV)) {
         textWithColor('ENV param is must')
         throw new Exception('ENV param is must')
     }
 
     env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
-    if(env.BRANCH_TO_CLONE == null || env.BRANCH_TO_CLONE == '') {
+    if(isEmpty(env.BRANCH_TO_CLONE)) {
         textWithColor('env.BRANCH_TO_CLONE param is must')
         throw new Exception('env.BRANCH_TO_CLONE param is must')
     }
 
     env.GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
-    if(env.GIT_REPO == null || env.GIT_REPO == '') {
+    if(isEmpty(env.GIT_REPO)) {
         textWithColor('env.GIT_REPO param is must')
         throw new Exception('env.GIT_REPO param is must')
     }
@@ -27,7 +27,7 @@ def call() {
     env.CONTAINER_RUN_ARGS = CONFIG.CONTAINER_RUN_ARGS
     env.SERVERS = CONFIG.SERVERS
     env.DOCKER_REPO = CONFIG.DOCKER_REPO
-    env.K8S_APPLY_FILES_GLOB = CONFIG.K8S_APPLY_FILES_GLOB
+    env.K8S_APPLY_FILES_GLOB = CONFIG.K8S_APPLY_FILES_GLOB ?? ""
     env.KUBE_CONFIG_ID = CONFIG.KUBE_CONFIG_ID
     
     try {

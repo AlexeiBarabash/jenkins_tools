@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 def call(success) {
-    if(env.SLACK_TOKEN == null || env.SLACK_TOKEN == "") {
+    if(isEmpty(env.SLACK_TOKEN)) {
         env.SLACK_TOKEN = 'bsQQ1TYnge9gh1f9qqv4DeHU'
     }
     message = " Job '${JOB_NAME} *[${env.BRANCH_TO_CLONE}]'* By *${env.BUILDER_NAME} - _${currentBuild.durationString}_* - ${BUILD_URL}";
