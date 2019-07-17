@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call() {
     textWithColor("Init")
-    if(isEmpty(env.ENV)) {
+    if(isEmpty(ENV) == true) {
         textWithColor('ENV param is must')
         throw new Exception('ENV param is must')
     }
