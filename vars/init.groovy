@@ -24,11 +24,11 @@ def call() {
     writeJSON file: 'myConfig.json', json: CONFIG
     sh "cat myConfig.json"
     
-    env.CONTAINER_RUN_ARGS = CONFIG.CONTAINER_RUN_ARGS
-    env.SERVERS = CONFIG.SERVERS
-    env.DOCKER_REPO = CONFIG.DOCKER_REPO
+    env.CONTAINER_RUN_ARGS = CONFIG.CONTAINER_RUN_ARGS ?: ""
+    env.SERVERS = CONFIG.SERVERS ?: ""
+    env.DOCKER_REPO = CONFIG.DOCKER_REPO ?: ""
     env.K8S_APPLY_FILES_GLOB = CONFIG.K8S_APPLY_FILES_GLOB ?: ""
-    env.KUBE_CONFIG_ID = CONFIG.KUBE_CONFIG_ID
+    env.KUBE_CONFIG_ID = CONFIG.KUBE_CONFIG_ID ?: ""
     
     try {
         wrap([$class: 'BuildUser']) {
