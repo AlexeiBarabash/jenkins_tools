@@ -2,10 +2,10 @@
 def call(val) {
     try {
         if(val != null && val != '') {
-            return true;
+            return false;
         }
     } catch(Exception ex) {
-        return false;
+        return true;
     }
-    return false;
+    return true;
 }
