@@ -1,11 +1,7 @@
 #!/usr/bin/env groovy
 def call(val) {
     try {
-        if(val != null && val != '') {
-            return false;
-        }
-    } catch(Exception ex) {
-        return true;
-    }
+        return val != null && val != '';
+    } catch(Exception ex) {}
     return true;
 }
