@@ -12,7 +12,7 @@ def call(sshUser = 'deploy') {
             git reset --hard
             git rm -r --cached .
 
-            docker build -t ${env.CONTAINER_NAME} .
+            docker build -t ${env.CONTAINER_NAME} --build-arg NODE_ENV=${ENV} .
             docker stop ${env.CONTAINER_NAME} || true
             docker rm ${env.CONTAINER_NAME} || true
             echo "\033[44m --------------------------------------- \033[0m"
