@@ -39,7 +39,7 @@ def call() {
     }
 
     
-    env.CONTAINER_NAME = "${env.CONTAINER_NAME}-${ENV}"
+    env.CONTAINER_NAME = "${env.CONTAINER_NAME}-${ENV}".replace("_", "-")
     env.CONTAINER_VERSION = "${(params.TAG_OR_BRANCH == null) ? BUILD_NUMBER : env.BRANCH_TO_CLONE}"
     env.CONTAINER_NAME_REPO = "${CONFIG.DOCKER_REPO}/${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
 }
