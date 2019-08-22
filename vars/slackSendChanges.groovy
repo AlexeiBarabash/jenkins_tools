@@ -10,9 +10,10 @@ def call() {
         for (commit in changes.getCommits()) {
             println(commit)
             def commitInfo = commit.getCommitInfo()
+            def message = commitInfo.getCommitMessage()
             println(commitInfo)
-            // println(commitInfo.getCommitMessage())
-            messageForWebhook = messageForWebhook + "\n" + commitInfo
+            println(message)
+            messageForWebhook = messageForWebhook + "\n" + message
             // println(commit.getChanges())
         }
 
