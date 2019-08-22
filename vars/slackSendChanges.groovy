@@ -16,18 +16,12 @@ def call() {
             messageForWebhook = messageForWebhook + message + "\n"
             // println(commit.getChanges())
         }
-
         textWithColor('git webhook start')
         println(messageForWebhook)
         def response = httpRequest(
             url: 'http://mydaily.codeoasis.com/api/webhooks/gitlogs/?git=' + env.GIT_REPO + "&log=" + URLEncoder.encode(messageForWebhook.replace("&"," and ").replace("\n", "    ")),
-            // requestBody : '{ "log" : "' + messageForWebhook + '" }',
-            // requestBody : '{ "log" : "aa" }',
             httpMode: "POST"
         )
-
-
         textWithColor('git webhook end')
-
         textWithColor('git changes log end')
 }
