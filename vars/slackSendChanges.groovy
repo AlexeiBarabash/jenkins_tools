@@ -13,7 +13,7 @@ def call() {
             def message = commitInfo.getCommitMessage()
             println(commitInfo)
             println(message)
-            messageForWebhook = messageForWebhook + "\n" + message
+            messageForWebhook = messageForWebhook + "\n test \n" + message
             // println(commit.getChanges())
         }
 
