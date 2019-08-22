@@ -1,6 +1,9 @@
 #!/usr/bin/env groovy
 def call() {
-    // if( env.ENV == "qa" ) {
+    try {
+        if(env.ENV != "qa") {
+            return;
+        }
         textWithColor('git changes log start')
         def messageForWebhook = "git logs: \n";
         def publisher = LastChanges.getLastChangesPublisher "LAST_SUCCESSFUL_BUILD", "SIDE", "LINE", true, true, "", "", "", "", ""
@@ -24,4 +27,6 @@ def call() {
         )
         textWithColor('git webhook end')
         textWithColor('git changes log end')
+        
+    } catch(Exception ex) {}
 }
