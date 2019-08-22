@@ -2,7 +2,7 @@
 def call() {
     // if( env.ENV == "qa" ) {
         textWithColor('git changes log start')
-        def messageForWebhook = "";
+        def messageForWebhook = "git logs: \n";
         def publisher = LastChanges.getLastChangesPublisher "LAST_SUCCESSFUL_BUILD", "SIDE", "LINE", true, true, "", "", "", "", ""
         publisher.publishLastChanges()
         def changes = publisher.getLastChanges()
@@ -13,7 +13,7 @@ def call() {
             def message = commitInfo.getCommitMessage()
             println(commitInfo)
             println(message)
-            messageForWebhook = messageForWebhook + "\n test \n" + message
+            messageForWebhook = messageForWebhook + message + "\n"
             // println(commit.getChanges())
         }
 
