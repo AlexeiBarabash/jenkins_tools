@@ -11,8 +11,8 @@ def call() {
             println(commit)
             def commitInfo = commit.getCommitInfo()
             println(commitInfo)
-            println(commitInfo.getCommitMessage())
-            messageForWebhook = messageForWebhook + "\n" + commitInfo.getCommitMessage()
+            // println(commitInfo.getCommitMessage())
+            messageForWebhook = messageForWebhook + "\n" + commitInfo
             // println(commit.getChanges())
         }
 
