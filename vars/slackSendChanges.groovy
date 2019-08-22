@@ -19,7 +19,7 @@ def call() {
         textWithColor('git webhook start')
         println(messageForWebhook)
         def response = httpRequest(
-            url: 'http://mydaily.codeoasis.com/api/webhooks/gitlogs/?git=' + GIT_REPO,
+            url: 'http://mydaily.codeoasis.com/api/webhooks/gitlogs/?git=' + env.GIT_REPO,
             body: '{ "log" : "' + messageForWebhook + '" }',
             httpMode: "POST"
         )
