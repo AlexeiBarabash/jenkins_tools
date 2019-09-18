@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def call(script,sshServer, sshUser = 'deploy', pass = '') {
+def call(script,sshServer, sshUser = 'deploy', pass = '', isWindows = false) {
     textWithColor("Deploy Container To - ${sshUser}@${sshServer}")
     def scriptFile = "./script.sh"
     sh """
@@ -7,7 +7,7 @@ def call(script,sshServer, sshUser = 'deploy', pass = '') {
         ${script}
         ' > ${scriptFile}
     """
-    def cmd = "ssh ${sshUser}@${sshServer} bash -s < ${scriptFile}"
+    def cmd = "ssh ${sshUser}@${sshServer} ${isWindows ? 'cmd' : 'bash'} -s < ${scriptFile}"
     if(pass != '') {
         cmd = "sshpass -p ${pass} " + cmd + " -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
     }
