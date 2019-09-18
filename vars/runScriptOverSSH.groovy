@@ -6,10 +6,6 @@ def call(script,sshServer, sshUser = 'deploy', pass = '', isWindows = false) {
         ${script}
         ' > ./script.sh
     """
-    def cmd = "ssh ${sshUser}@${sshServer} ${isWindows ? 'cmd' : 'bash'} -s < ./script.sh -o StrictHostKeyChecking=no"
-    if(pass != '') {
-        cmd = "sshpass -p ${pass} " + cmd
-    }
-    sh cmd
+    sh "${pass != '' ? "sshpass -p ${pass} " : ""} ssh ${sshUser}@${sshServer} ${isWindows ? 'cmd' : 'bash'} -s < ./script.sh -o StrictHostKeyChecking=no"
     textWithColor("Finished Deploy Container")
 }
