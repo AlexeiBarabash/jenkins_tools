@@ -10,6 +10,7 @@ def call(success, useHttpRequest = false) {
         if(useHttpRequest) {
             def body = """
             {
+                "channel": "${env.SLACK_CH}",
                 "attachments": [
                     {
                         "color": "${color}",
