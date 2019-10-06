@@ -8,10 +8,20 @@ def call(success, useHttpRequest = false) {
         message = success ? "*SUCCESSFUL:*" + message :  "*FAILED:*" + message
         color =  success ? '#00FF00' : '#FF0000'
         if(useHttpRequest) {
+            def body = """
+            {
+                "attachments": [
+                    {
+                        "color": "${color}",
+                        "text": "${message}"
+                    }
+                ]
+            }
+            """
             response = httpRequest (consoleLogResponseBody: true,
             contentType: 'APPLICATION_JSON',
             httpMode: 'POST',
-            requestBody: "{ \"text\": \"${message}\" }",
+            requestBody: body,
             url: "https://codeoasis.slack.com/services/hooks/jenkins-ci?token=" + env.SLACK_TOKEN,
             validResponseCodes: '200')
             return
