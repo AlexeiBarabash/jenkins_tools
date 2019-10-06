@@ -16,7 +16,7 @@ def call(success, useHttpRequest = true) {
                     {
                         "color": "${color}",
                         "text": "${message}",
-                        "footer": "${currentBuild.durationString} - ${BUILD_URL}",
+                        "footer": "${currentBuild.durationString}",
                         "title": "${title}",
                         "title_link": "${title_link}"
                     }
