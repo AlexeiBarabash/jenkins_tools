@@ -7,8 +7,8 @@ def call(sshUser = 'deploy') {
             cd ./${CONTAINER_NAME}
             git reset --hard
             git fetch --all
-            git checkout ${env.BRANCH_TO_CLONE}
-            git pull
+            git checkout ${env.BRANCH_TO_CLONE} -f
+            git pull -f
             git reset --hard
             git rm -r --cached .
 
