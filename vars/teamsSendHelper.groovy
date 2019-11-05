@@ -11,9 +11,9 @@ def call(success) {
             textWithColor("env.TEAMS_WEBHOOK is missing")
             return
         }
-        def title = " Job '${JOB_NAME} *[${env.BRANCH_TO_CLONE}]'* By *${env.BUILDER_NAME}*"
+        def title = " Job - ${JOB_NAME} *[${env.BRANCH_TO_CLONE}] By -${env.BUILDER_NAME}"
         def title_link = BUILD_URL;
-        def message = success ? "*SUCCESSFUL*"  :  "*FAILED*"
+        def message = success ? "**SUCCESSFUL**"  :  "**FAILED**"
         def color =  success ? '00FF00' : 'FF0000'
         message = message + " - takes - ${currentBuild.durationString}"
 
