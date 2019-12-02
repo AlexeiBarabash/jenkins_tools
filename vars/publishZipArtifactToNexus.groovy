@@ -12,4 +12,6 @@ def call(filePath, repo = 'http://registry.codeoasis.com:8081/repository/Files/'
             customHeaders: [[maskValue: false, name: 'Authorization', value: auth]]
     )
     textWithColor("Done Publish Zip Artifact To Nexus")
+
+    return repo + fileName
 }
