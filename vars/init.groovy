@@ -6,7 +6,12 @@ def call() {
         throw new Exception('ENV param is must')
     }
 
-    env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
+    try 
+    {
+        env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
+    } catch(Exception ex) {
+        env.BRANCH_TO_CLONE = 'integration'
+    }
     if(isEmpty(env.BRANCH_TO_CLONE)) {
         textWithColor('env.BRANCH_TO_CLONE param is must')
         throw new Exception('env.BRANCH_TO_CLONE param is must')
