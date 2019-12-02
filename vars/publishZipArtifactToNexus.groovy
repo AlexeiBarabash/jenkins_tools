@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 def call(filePath, repo = 'http://registry.codeoasis.com:8081/repository/Files/', user = 'jenkins:zxasqw12') {
-    textWithColor("ENV")
+    textWithColor("Publish Zip Artifact To Nexus")
     def fileName = JOB_NAME + '_' + BUILD_NUMBER + '.zip'
     def auth = 'Basic ' + user.bytes.encodeBase64().toString()
     httpRequest (consoleLogResponseBody: true,
@@ -11,4 +11,5 @@ def call(filePath, repo = 'http://registry.codeoasis.com:8081/repository/Files/'
             validResponseCodes: '201',
             customHeaders: [[maskValue: false, name: 'Authorization', value: auth]]
     )
+    textWithColor("Done Publish Zip Artifact To Nexus")
 }
