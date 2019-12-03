@@ -20,6 +20,7 @@ def call() {
     
     textWithColor("Config ${ENV}")
     try {
+        CONFIG = env.CONFIG ?: ""
         CONFIG = readJSON(text: CONFIG)
         CONFIG = CONFIG["${ENV}"]
         writeJSON file: 'myConfig.json', json: CONFIG
