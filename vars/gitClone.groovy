@@ -14,8 +14,8 @@ def call() {
         sh "git submodule foreach 'git checkout ${BRANCH_TO_CLONE} || true'"
         sh "ls -latr"
     } else {
-        powershell "git submodule update --init --recursive || true"
-        powershell "git submodule foreach 'git checkout ${BRANCH_TO_CLONE} || true'"
+        powershell "git submodule update --init --recursive"
+        powershell "git submodule foreach 'git checkout ${BRANCH_TO_CLONE}'"
         powershell "ls -latr"
     }
     
