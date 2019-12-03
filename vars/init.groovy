@@ -19,10 +19,16 @@ def call() {
     }
     
     textWithColor("Config ${ENV}")
-    CONFIG = readJSON(text: CONFIG)
-    CONFIG = CONFIG["${ENV}"]
-    writeJSON file: 'myConfig.json', json: CONFIG
-    sh "cat myConfig.json"
+    try {
+        CONFIG = readJSON(text: CONFIG)
+        CONFIG = CONFIG["${ENV}"]
+        writeJSON file: 'myConfig.json', json: CONFIG
+        sh "cat myConfig.json"
+    } catch(Exception ex) {
+        textWithColor("Config Error")
+        echo e.toString()
+    }
+    
     
     env.CONTAINER_RUN_ARGS = CONFIG.CONTAINER_RUN_ARGS ?: ""
     env.SERVERS = CONFIG.SERVERS ?: ""
