@@ -31,7 +31,7 @@ def call() {
         env.DOCKER_REPO = CONFIG.DOCKER_REPO ?: ""
         env.K8S_APPLY_FILES_GLOB = CONFIG.K8S_APPLY_FILES_GLOB ?: ""
         env.KUBE_CONFIG_ID = CONFIG.KUBE_CONFIG_ID ?: ""
-    } catch(Exception ex) {
+    } catch(ex) {
         textWithColor("Config Error")
         echo ex.toString()
     }
