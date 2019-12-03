@@ -26,7 +26,7 @@ def call() {
         sh "cat myConfig.json"
     } catch(Exception ex) {
         textWithColor("Config Error")
-        echo e.toString()
+        echo ex.toString()
     }
     
     
