@@ -9,7 +9,7 @@ def call() {
         submoduleCfg: [],
         userRemoteConfigs: [[url: GIT_REPO]]
     ])
-    if(isEmpty(ENV.IsWindows)) {
+    if(isEmpty(env.IsWindows)) {
         sh "git submodule update --init --recursive || true"
         sh "git submodule foreach 'git checkout ${BRANCH_TO_CLONE} || true'"
         sh "ls -latr"
