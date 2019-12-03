@@ -16,7 +16,7 @@ def call() {
     } else {
         powershell "git submodule update --init --recursive"
         powershell "git submodule foreach 'git checkout ${BRANCH_TO_CLONE}'"
-        powershell "ls -latr"
+        powershell "dir"
     }
     
     textWithColor("Finish Git Clone - ${BRANCH_TO_CLONE}")
