@@ -31,14 +31,11 @@ def call() {
         env.DOCKER_REPO = CONFIG.DOCKER_REPO ?: ""
         env.K8S_APPLY_FILES_GLOB = CONFIG.K8S_APPLY_FILES_GLOB ?: ""
         env.KUBE_CONFIG_ID = CONFIG.KUBE_CONFIG_ID ?: ""
-    } catch(ex) {
+    } catch(Exception ex) {
         textWithColor("Config Error")
         echo ex.toString()
     }
-    
-    
-
-    
+ 
     try {
         wrap([$class: 'BuildUser']) {
             env.BUILDER_NAME = (BUILD_USER == '' || BUILD_USER == null || BUILD_USER == 'SCMTrigger') ? gitlabUserName : BUILD_USER
@@ -50,5 +47,5 @@ def call() {
     
     env.CONTAINER_NAME = "${env.CONTAINER_NAME}-${ENV}".replace("_", "-")
     env.CONTAINER_VERSION = "${(params.TAG_OR_BRANCH == null) ? BUILD_NUMBER : env.BRANCH_TO_CLONE}"
-    env.CONTAINER_NAME_REPO = "${CONFIG.DOCKER_REPO}/${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
+    env.CONTAINER_NAME_REPO = "${env.DOCKER_REPO}/${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
 }
