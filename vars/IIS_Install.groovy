@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
-def call(val) {
+def call() {
+    textWithColor("Install IIS")
     try {
         powershell "Set-ExecutionPolicy Bypass -Scope Process"
         powershell "Enable-WindowsOptionalFeature -Online -FeatureName IIS-WebServerRole"
@@ -36,6 +37,7 @@ def call(val) {
         powershell "choco install webdeploy -y"
         powershell "choco install urlrewrite -y"
     } catch(Exception ex) {
+        textWithColor("Install IIS Error")
         echo ex.toString()
     }
 }
