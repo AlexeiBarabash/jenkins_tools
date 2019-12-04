@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 def call(val) {
     def changeLogSets = currentBuild.changeSets
+    def arr = new ArrayList()
     print(changeLogSets)
     for (int i = 0; i < changeLogSets.size(); i++) {
         def entries = changeLogSets[i].items
@@ -8,6 +9,7 @@ def call(val) {
             def entry = entries[j]
             echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
             def files = new ArrayList(entry.affectedFiles)
+            print
             arr = arr + files
             for (int k = 0; k < files.size(); k++) {
                 def file = files[k]
