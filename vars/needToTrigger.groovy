@@ -1,6 +1,10 @@
 #!/usr/bin/env groovy
 def call(val) {
     def changeLogSets = currentBuild.changeSets
+    if(changeLogSets.size() <= 0) {
+        echo "manual build"
+        return true
+    }
     for (int i = 0; i < changeLogSets.size(); i++) {
         def entries = changeLogSets[i].items
         for (int j = 0; j < entries.length; j++) {
