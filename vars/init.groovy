@@ -6,18 +6,21 @@ def call() {
         throw new Exception('ENV param is must')
     }
 
-    env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
-    if(isEmpty(env.BRANCH_TO_CLONE)) {
-        textWithColor('env.BRANCH_TO_CLONE param is must')
-        throw new Exception('env.BRANCH_TO_CLONE param is must')
+    try {
+        env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
+    } catch(Exception ex) {
+        textWithColor("params.TAG_OR_BRANCH or GIT_BRANCH is missing")
+        echo ex.toString()
+        env.BRANCH_TO_CLONE = 'integration'
     }
 
-    env.GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
-    if(isEmpty(env.GIT_REPO)) {
-        textWithColor('env.GIT_REPO param is must')
-        throw new Exception('env.GIT_REPO param is must')
+    try {
+        env.GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
+    } catch(Exception ex) {
+        textWithColor("params.TAG_OR_BRANCH or GIT_BRANCH is missing")
+        echo ex.toString()
     }
-    
+   
     textWithColor("Config ${ENV}")
     try {
         CONFIG = env.CONFIG ?: ""
@@ -31,6 +34,8 @@ def call() {
         env.DOCKER_REPO = CONFIG.DOCKER_REPO ?: ""
         env.K8S_APPLY_FILES_GLOB = CONFIG.K8S_APPLY_FILES_GLOB ?: ""
         env.KUBE_CONFIG_ID = CONFIG.KUBE_CONFIG_ID ?: ""
+        env.agentLabel = CONFIG.agentLabel ?: ""
+        env.isWindows = CONFIG.isWindows ?: "false"
     } catch(Exception ex) {
         textWithColor("Config Error")
         echo ex.toString()

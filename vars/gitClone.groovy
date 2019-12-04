@@ -9,15 +9,10 @@ def call() {
         submoduleCfg: [],
         userRemoteConfigs: [[url: GIT_REPO]]
     ])
-    if(isEmpty(env.IsWindows)) {
-        sh "git submodule update --init --recursive || true"
-        sh "git submodule foreach 'git checkout ${BRANCH_TO_CLONE} || true'"
-        sh "ls -latr"
-    } else {
-        powershell "git submodule update --init --recursive"
-        powershell "git submodule foreach 'git checkout ${BRANCH_TO_CLONE}'"
-        powershell "dir"
-    }
-    
+    bashCommand("git submodule update --init --recursive || true")
+    bashCommand("git submodule foreach 'git checkout ${BRANCH_TO_CLONE} || true'")
+    bashCommand('git reset --hard || true')
+    bashCommand('git clean -dfx || true')
+    bashCommand("ls -latr")   
     textWithColor("Finish Git Clone - ${BRANCH_TO_CLONE}")
 }
