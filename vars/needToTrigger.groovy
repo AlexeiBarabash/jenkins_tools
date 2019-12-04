@@ -1,4 +1,3 @@
-
 #!/usr/bin/env groovy
 def call(val) {
     def changeLogSets = currentBuild.changeSets
