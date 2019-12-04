@@ -9,7 +9,7 @@ def call(val) {
             def entry = entries[j]
             echo "${entry.commitId} by ${entry.author} on ${new Date(entry.timestamp)}: ${entry.msg}"
             def files = new ArrayList(entry.affectedFiles)
-            print
+            print(files)
             arr = arr + files
             for (int k = 0; k < files.size(); k++) {
                 def file = files[k]
