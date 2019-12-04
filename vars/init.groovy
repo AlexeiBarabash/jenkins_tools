@@ -1,10 +1,11 @@
 #!/usr/bin/env groovy
 def call() {
     textWithColor("Init")
-    if(isEmpty(ENV)) {
+    if(isEmpty(env.ENV)) {
         textWithColor('ENV param is must')
         throw new Exception('ENV param is must')
     }
+    ENV = env.ENV
 
     try {
         env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
