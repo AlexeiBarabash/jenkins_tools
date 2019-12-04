@@ -12,7 +12,7 @@ def call(filePath, repo = 'http://registry.codeoasis.com:8081/repository/Files/'
     //         validResponseCodes: '201',
     //         customHeaders: [[maskValue: false, name: 'Authorization', value: auth]]
     // )
-    powershell "\"C:\\Program Files\\Git\\bin\\bash.exe\" -c \"curl -v --user '${user}' --upload-file ${filePath} ${repo + fileName}\""
+    powershell "C:\\\"Program Files\"\\Git\\bin\\bash.exe -c \"curl -v --user '${user}' --upload-file ${filePath} ${repo + fileName}\""
     textWithColor("Done Publish Zip Artifact To Nexus")
 
     return repo + fileName
