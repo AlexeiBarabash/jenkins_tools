@@ -9,6 +9,7 @@ def call() {
         submoduleCfg: [],
         userRemoteConfigs: [[url: GIT_REPO]]
     ])
+    textWithColor("Git Clone - Cleans")
     if(isWindows()) {
         powershell "git submodule update --init --recursive"
         powershell "git submodule foreach 'git checkout ${BRANCH_TO_CLONE}'"
