@@ -28,7 +28,6 @@ def call() {
         CONFIG = readJSON(text: CONFIG)
         CONFIG = CONFIG["${ENV}"]
         writeJSON file: 'myConfig.json', json: CONFIG
-        sh "cat myConfig.json"
 
         env.CONTAINER_RUN_ARGS = CONFIG.CONTAINER_RUN_ARGS ?: ""
         env.SERVERS = CONFIG.SERVERS ?: ""
@@ -37,6 +36,8 @@ def call() {
         env.KUBE_CONFIG_ID = CONFIG.KUBE_CONFIG_ID ?: ""
         env.agentLabel = CONFIG.agentLabel ?: ""
         env.isWindows = CONFIG.isWindows ?: "false"
+
+        bashCommand("cat myConfig.json")
     } catch(Exception ex) {
         textWithColor("Config Error")
         echo ex.toString()
