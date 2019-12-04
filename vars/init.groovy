@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def call(autoDetectEnv = false) {
+def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
     textWithColor("Init")
     
     try {
@@ -17,6 +17,9 @@ def call(autoDetectEnv = false) {
             env.ENV = 'qa'
         }  else if(env.BRANCH_TO_CLONE.toLowerCase() == 'integration') {
             env.ENV = 'integration'
+        }
+        if(autoDetectEnvFirstLetterUpper && !isEmpty(env.BRANCH_TO_CLONE)) {
+            env.ENV = env.ENV[0].toUpperCase() + env.ENV.substring(1)
         }
     }
 
