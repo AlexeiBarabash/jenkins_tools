@@ -6,7 +6,7 @@ def call(filePath, repo = 'http://registry.codeoasis.com:8081/repository/Files/'
     def auth = 'Basic ' + user.bytes.encodeBase64().toString()
     httpRequest (consoleLogResponseBody: true,
             uploadFile: filePath,
-            httpMode: 'PUSH',
+            httpMode: 'POST',
             url: repo + fileName,
             validResponseCodes: '201',
             customHeaders: [[maskValue: false, name: 'Authorization', value: auth]]
