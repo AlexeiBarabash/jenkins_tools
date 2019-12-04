@@ -35,6 +35,7 @@ def call() {
         env.KUBE_CONFIG_ID = CONFIG.KUBE_CONFIG_ID ?: ""
         env.agentLabel = CONFIG.agentLabel ?: ""
         env.isWindows = CONFIG.isWindows ?: "false"
+        env.IIS_FOLDER = CONFIG.IIS_FOLDER ?: ""
 
         writeJSON file: './myConfig.json', json: CONFIG
         bashCommand("cat myConfig.json")
