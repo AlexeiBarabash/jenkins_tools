@@ -18,11 +18,13 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
         }  else if(env.BRANCH_TO_CLONE.toLowerCase() == 'integration') {
             env.ENV = 'integration'
         }
-        if(autoDetectEnvFirstLetterUpper && !isEmpty(env.BRANCH_TO_CLONE)) {
-            env.ENV = env.ENV[0].toUpperCase() + env.ENV.substring(1)
+        if(!isEmpty(env.ENV)) {
+            if(autoDetectEnvFirstLetterUpper) {
+                env.ENV = env.ENV[0].toUpperCase() + env.ENV.substring(1)
+            }
+            textWithColor("Auto Detect Env, ENV=${env.ENV}")
         }
     }
-
 
     if(isEmpty(env.ENV)) {
         textWithColor('ENV param is must')
