@@ -11,11 +11,11 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
     }
 
     if(autoDetectEnv && !isEmpty(env.BRANCH_TO_CLONE)) {
-        if(env.BRANCH_TO_CLONE.toLowerCase() == 'master') {
+        if(env.BRANCH_TO_CLONE.toLowerCase() == 'master' || env.BRANCH_TO_CLONE.toLowerCase() == 'origin/master') {
             env.ENV = 'stage'
-        } else if(env.BRANCH_TO_CLONE.toLowerCase() == 'qa') {
+        } else if(env.BRANCH_TO_CLONE.toLowerCase() == 'qa' || env.BRANCH_TO_CLONE.toLowerCase() == 'origin/qa') {
             env.ENV = 'qa'
-        }  else if(env.BRANCH_TO_CLONE.toLowerCase() == 'integration') {
+        } else if(env.BRANCH_TO_CLONE.toLowerCase() == 'integration' || env.BRANCH_TO_CLONE.toLowerCase() == 'origin/integration') {
             env.ENV = 'integration'
         }
         if(!isEmpty(env.ENV)) {
