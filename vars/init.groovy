@@ -1,19 +1,31 @@
 #!/usr/bin/env groovy
-def call() {
+def call(autoDetectEnv = false) {
     textWithColor("Init")
+    
+    try {
+        env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: ""
+    } catch(Exception ex) {
+        textWithColor("params.TAG_OR_BRANCH or GIT_BRANCH is missing")
+        echo ex.toString()
+        env.BRANCH_TO_CLONE = ''
+    }
+
+    if(autoDetectEnv && !isEmpty(env.BRANCH_TO_CLONE)) {
+        if(env.BRANCH_TO_CLONE.toLowerCase() == 'master') {
+            env.ENV = 'stage'
+        } else if(env.BRANCH_TO_CLONE.toLowerCase() == 'qa') {
+            env.ENV = 'qa'
+        }  else if(env.BRANCH_TO_CLONE.toLowerCase() == 'integration') {
+            env.ENV = 'integration'
+        }
+    }
+
+
     if(isEmpty(env.ENV)) {
         textWithColor('ENV param is must')
         throw new Exception('ENV param is must')
     }
     ENV = env.ENV
-
-    try {
-        env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: "integration"
-    } catch(Exception ex) {
-        textWithColor("params.TAG_OR_BRANCH or GIT_BRANCH is missing")
-        echo ex.toString()
-        env.BRANCH_TO_CLONE = 'integration'
-    }
 
     try {
         env.GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
