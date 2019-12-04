@@ -1,7 +1,10 @@
 #!/usr/bin/env groovy
 def call() {
+    def notWindows = true
     try {
-        return env.isWindows == true || env.isWindows == '' || env.isWindows == "true";
-    } catch(Exception ex) {}
-    return false;
+        notWindows = isEmpty(env.isWindows) || env.isWindows == "false" || env.isWindows == false
+    } catch(Exception ex) {
+        notWindows = true
+    }
+    return !notWindows;
 }
