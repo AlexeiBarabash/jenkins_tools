@@ -2,6 +2,8 @@
 
 def call(outputFile ,urlPath, basicAuth = 'jenkins:zxasqw12') {
     textWithColor("Download File")
+    echo outputFile
+    echo urlPath
     // def auth = 'Basic ' + basicAuth.bytes.encodeBase64().toString()
     // httpRequest (consoleLogResponseBody: true,
     //         httpMode: 'GET',
