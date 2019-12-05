@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def call(success, useHttpRequest = true) {
-    teamsSendHelper(success)
-    slackSendHelper(success, useHttpRequest)
+def call(checkTriggered = true) {
+    teamsSendHelper(checkTriggered)
+    newSlackSendHelper(checkTriggered)
 }

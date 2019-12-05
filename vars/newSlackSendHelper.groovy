@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 def call(checkTriggered = true) {
-    success = currentBuild.result == 'SUCCESS'
+    def success = currentBuild.result == 'SUCCESS'
     if(currentBuild.result != 'SUCCESS' && currentBuild.result != 'FAILURE')
     {
         return;

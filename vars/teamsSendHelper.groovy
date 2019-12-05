@@ -1,5 +1,13 @@
 #!/usr/bin/env groovy
-def call(success) {
+def call(checkTriggered = true) {
+    def success = currentBuild.result == 'SUCCESS'
+    if(currentBuild.result != 'SUCCESS' && currentBuild.result != 'FAILURE')
+    {
+        return;
+    }
+    if(checkTriggered && !needToTrigger()) {
+        return;
+    }
     try {
         if(isEmpty(env.BRANCH_TO_CLONE)) {
             env.BRANCH_TO_CLONE = 'unknown'
