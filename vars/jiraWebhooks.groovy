@@ -1,9 +1,12 @@
 #!/usr/bin/env groovy
+import hudson.model.*
+
 def call(integrationIsQa = false) {
     try {
         if(!(env.ENV.toLowerCase() == "qa" || (integrationIsQa && env.ENV.toLowerCase() == 'integration'))) {
             return;
         }
+        textWithColor('jiraWebhooks')
         textWithColor('git changes log start')
         def messageForWebhook = "git logs: \n";
         def publisher = LastChanges.getLastChangesPublisher "LAST_SUCCESSFUL_BUILD", "SIDE", "LINE", true, true, "", "", "", "", ""
