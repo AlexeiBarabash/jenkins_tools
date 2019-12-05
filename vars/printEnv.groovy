@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
 def call() {
-    textWithColor("ENV")
+    textWithColor("Print ENV")
     bashCommand("printenv")
 }
