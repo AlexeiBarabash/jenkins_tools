@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
-def call() {
+def call(integrationIsQa = false) {
     try {
-        if(env.ENV != "qa") {
+        if(!(env.ENV.toLowerCase() == "qa" || (integrationIsQa && env.ENV.toLowerCase() = 'integration'))) {
             return;
         }
         textWithColor('git changes log start')
@@ -28,5 +28,8 @@ def call() {
         textWithColor('git webhook end')
         textWithColor('git changes log end')
         
-    } catch(Exception ex) {}
+    } catch(Exception ex) {
+        textWithColor("jiraWebhooks Error")
+        echo ex.toString()
+    }
 }
