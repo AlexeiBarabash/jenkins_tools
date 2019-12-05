@@ -8,7 +8,6 @@ def call(checkTriggered = true) {
     if(checkTriggered && !needToTrigger()) {
         return;
     }
-
     try {
         if(isEmpty(env.SLACK_TOKEN)) {
             env.SLACK_TOKEN = 'bsQQ1TYnge9gh1f9qqv4DeHU'
