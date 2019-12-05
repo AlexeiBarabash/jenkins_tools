@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 def call(success, useHttpRequest = true) {
+    success = currentBuild.result == 'SUCCESS'
     try {
         if(isEmpty(env.SLACK_TOKEN)) {
             env.SLACK_TOKEN = 'bsQQ1TYnge9gh1f9qqv4DeHU'
@@ -16,6 +17,7 @@ def call(success, useHttpRequest = true) {
         }
         def title = " Job '${JOB_NAME} *[${env.BRANCH_TO_CLONE}]'* By *${env.BUILDER_NAME}*"
         def title_link = BUILD_URL;
+        
         def message = success ? "*SUCCESSFUL*"  :  "*FAILED*"
         def color =  success ? '#00FF00' : '#FF0000'
         if(useHttpRequest) {
