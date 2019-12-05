@@ -67,6 +67,8 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
         }
     } catch(Exception ex) {
         env.BUILDER_NAME = 'unknown'
+        textWithColor("BuildUser Error")
+        echo ex.toString()
     }
 
     
