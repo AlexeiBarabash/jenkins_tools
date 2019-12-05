@@ -1,10 +1,8 @@
 #!/usr/bin/env groovy
 def call() {
-    def notWindows = true
     try {
-        notWindows = isEmpty(env.isWindows) || env.isWindows == "false" || env.isWindows == false
+        return NODE_LABELS.toLowerCase().indexOf('windows') >= 0 || env.isWindows == "true"
     } catch(Exception ex) {
-        notWindows = true
+        return false
     }
-    return !notWindows;
 }

@@ -24,7 +24,7 @@ def call() {
     //     sh "ls -latr"
     // }
     bashCommand("git submodule update --init --recursive || true")
-    bashCommand("git submodule foreach 'git checkout ${BRANCH_TO_CLONE} || true'")
+    bashCommand("git submodule foreach 'git checkout ${BRANCH_TO_CLONE} -f || true'")
     bashCommand('git reset --hard || true')
     bashCommand('git clean -dfx || true')
     bashCommand("ls -latr")

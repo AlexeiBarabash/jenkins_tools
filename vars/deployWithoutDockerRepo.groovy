@@ -2,7 +2,7 @@ def call(sshUser = 'deploy') {
     for(sshServer in (readJSON(text: env.SERVERS))) {
         textWithColor("Deploy Container To - ${sshUser}@${sshServer}")
         def scriptFile = "./script.sh"
-        sh """
+        bashCommand("""
         echo '
             cd ./${CONTAINER_NAME}
             git reset --hard
@@ -20,8 +20,8 @@ def call(sshUser = 'deploy') {
             echo "\033[44m --------------------------------------- \033[0m"
             ${CONTAINER_RUN_ARGS} --name ${env.CONTAINER_NAME} ${env.CONTAINER_NAME} || exit 1
             docker ps -a ' > ${scriptFile}
-        """
-        sh "ssh ${sshUser}@${sshServer} bash -s < ${scriptFile}"
+        """)
+        bashCommand("ssh ${sshUser}@${sshServer} bash -s < ${scriptFile}")
         textWithColor("Finished Deploy Container")
     }
 }
