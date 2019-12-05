@@ -4,6 +4,6 @@ def call() {
     bashCommand("rm -rf ./Artifact.zip || true")
     downloadFile('./Artifact.zip',env.ArtifactUrl)
     bashCommand("ls -latr")
-    unzip dir: env.IIS_FOLDER, zipFile: './Artifact.zip'
+    unzip charset: 'CP866' dir: env.IIS_FOLDER, zipFile: './Artifact.zip'
     textWithColor("DONE IIS_DownloadZipToWebsite")
 }
