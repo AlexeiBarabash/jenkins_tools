@@ -28,7 +28,7 @@ def call(integrationIsQa = false) {
             def entries = changeLogSets[i].items
             for (int j = 0; j < entries.length; j++) {
                 def entry = entries[j]
-                messageForWebhook = messageForWebhook + entry.msg + "\n"
+                messageForWebhook = "${messageForWebhook} ${entry.msg} + \n"
             }
         }
         textWithColor('git webhook start')
