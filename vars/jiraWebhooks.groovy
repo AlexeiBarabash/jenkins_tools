@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call(integrationIsQa = false) {
     try {
-        if(!(env.ENV.toLowerCase() == "qa" || (integrationIsQa && env.ENV.toLowerCase() = 'integration'))) {
+        if(!(env.ENV.toLowerCase() == "qa" || (integrationIsQa && env.ENV.toLowerCase() == 'integration'))) {
             return;
         }
         textWithColor('git changes log start')
