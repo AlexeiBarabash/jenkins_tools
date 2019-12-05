@@ -22,13 +22,13 @@ def call(integrationIsQa = false) {
         //     messageForWebhook = messageForWebhook + message + "\n"
         //     // println(commit.getChanges())
         // }
-        
+
         def changeLogSets = currentBuild.changeSets
         for (int i = 0; i < changeLogSets.size(); i++) {
             def entries = changeLogSets[i].items
             for (int j = 0; j < entries.length; j++) {
                 def entry = entries[j]
-                messageForWebhook = messageForWebhook + entry.message + "\n"
+                messageForWebhook = messageForWebhook + entry.msg + "\n"
             }
         }
         textWithColor('git webhook start')
