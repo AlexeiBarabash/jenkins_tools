@@ -9,18 +9,25 @@ def call(integrationIsQa = false) {
         textWithColor('jiraWebhooks')
         textWithColor('git changes log start')
         def messageForWebhook = "git logs: \n";
-        def publisher = LastChanges.getLastChangesPublisher "LAST_SUCCESSFUL_BUILD", "SIDE", "LINE", true, true, "", "", "", "", ""
-        publisher.publishLastChanges()
-        def changes = publisher.getLastChanges()
+        // def publisher = LastChanges.getLastChangesPublisher "LAST_SUCCESSFUL_BUILD", "SIDE", "LINE", true, true, "", "", "", "", ""
+        // publisher.publishLastChanges()
+        // def changes = publisher.getLastChanges()
         // println(changes.getEscapedDiff())
-        for (commit in changes.getCommits()) {
-            println(commit)
-            def commitInfo = commit.getCommitInfo()
-            def message = commitInfo.getCommitMessage()
-            println(commitInfo)
-            println(message)
-            messageForWebhook = messageForWebhook + message + "\n"
-            // println(commit.getChanges())
+        // for (commit in changes.getCommits()) {
+        //     println(commit)
+        //     def commitInfo = commit.getCommitInfo()
+        //     def message = commitInfo.getCommitMessage()
+        //     println(commitInfo)
+        //     println(message)
+        //     messageForWebhook = messageForWebhook + message + "\n"
+        //     // println(commit.getChanges())
+        // }
+        for (int i = 0; i < changeLogSets.size(); i++) {
+            def entries = changeLogSets[i].items
+            for (int j = 0; j < entries.length; j++) {
+                def entry = entries[j]
+                messageForWebhook = messageForWebhook + entry.message + "\n"
+            }
         }
         textWithColor('git webhook start')
         println(messageForWebhook)
