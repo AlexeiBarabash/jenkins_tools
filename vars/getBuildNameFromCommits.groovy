@@ -16,6 +16,7 @@ def call() {
             }
         }
         env.BUILDER_NAME = builderName
+        textWithColor("getBuildNameFromCommits done - ${builderName}")
     } catch(Exception ex) {
         env.BUILDER_NAME = 'unknown'
         textWithColor("getBuildNameFromCommits Error")
