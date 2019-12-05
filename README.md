@@ -27,3 +27,4 @@ def call(someArg) {
 ```
 
 use isWindows func to detect if the agent is windows, you can use bashCommand func to run sh scripts on windows
+aaa
