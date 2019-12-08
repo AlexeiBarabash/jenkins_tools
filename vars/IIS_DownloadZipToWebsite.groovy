@@ -7,7 +7,7 @@ def call() {
     bashCommand("rm -rf ./Artifact.zip || true")
     downloadFile('./Artifact.zip',env.ArtifactUrl)
     bashCommand("ls -latr")
-    powershell "Expand-Archive ./Artifact.zip -DestinationPath ${env.IIS_FOLDER} -Force"
+    powershell "\$progressPreference = 'Continue';Expand-Archive ./Artifact.zip -DestinationPath ${env.IIS_FOLDER} -Force"
     // unzip dir: env.IIS_FOLDER, zipFile: './Artifact.zip'
     //bashCommand("unzip -o ./Artifact.zip -d ${env.IIS_FOLDER}")
     textWithColor("DONE IIS_DownloadZipToWebsite")
