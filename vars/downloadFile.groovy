@@ -12,7 +12,7 @@ def call(outputFile ,urlPath, basicAuth = 'jenkins:zxasqw12') {
     //         responseHandle: 'NONE',
     //         customHeaders: [[maskValue: false, name: 'Authorization', value: auth]]
     // )
-    bashCommand("curl -v --user '${basicAuth}' --output ${outputFile} ${urlPath}")
+    bashCommand("curl --insecure -v --user '${basicAuth}' --output ${outputFile} ${urlPath}")
     textWithColor("Done Download File")
 }
 
