@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+// example: env.SERVERS = ["10.0.0.1","10.1.2.3"]
 def call(sshUser = 'deploy') {
     for(sshServer in (readJSON(text: env.SERVERS))) {
         textWithColor("Deploy Container To - ${sshUser}@${sshServer}")
@@ -22,6 +24,6 @@ def call(sshUser = 'deploy') {
             docker ps -a ' > ${scriptFile}
         """)
         bashCommand("ssh ${sshUser}@${sshServer} bash -s < ${scriptFile}")
-        textWithColor("Finished Deploy Container")
+        textWithColor("Finished Deploy Container", "green")
     }
 }

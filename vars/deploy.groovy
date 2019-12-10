@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 def call() {
     textWithColor("Deploying ${ENV}")
     if(!isEmpty(env.K8S_APPLY_FILES_GLOB) && !isEmpty(env.KUBE_CONFIG_ID)) {
@@ -7,5 +8,5 @@ def call() {
             sshDeploy(server)
         }
     }
-    textWithColor("Finished Deploying ${ENV}")
+    textWithColor("Finished Deploying ${ENV}", "green")
 }

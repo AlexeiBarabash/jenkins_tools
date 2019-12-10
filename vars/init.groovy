@@ -5,7 +5,7 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
     try {
         env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: ""
     } catch(Exception ex) {
-        textWithColor("params.TAG_OR_BRANCH or GIT_BRANCH is missing")
+        textWithColor("params.TAG_OR_BRANCH or GIT_BRANCH is missing", "red")
         echo ex.toString()
         env.BRANCH_TO_CLONE = ''
     }
@@ -22,12 +22,12 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
             if(autoDetectEnvFirstLetterUpper) {
                 env.ENV = env.ENV[0].toUpperCase() + env.ENV.substring(1)
             }
-            textWithColor("Auto Detect Env, ENV=${env.ENV}")
+            textWithColor("Auto Detect Env, ENV=${env.ENV}", "green")
         }
     }
 
     if(isEmpty(env.ENV)) {
-        textWithColor('ENV param is must')
+        textWithColor('ENV param is must', "red")
         throw new Exception('ENV param is must')
     }
     ENV = env.ENV
@@ -35,7 +35,7 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
     try {
         env.GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
     } catch(Exception ex) {
-        textWithColor("params.TAG_OR_BRANCH or GIT_BRANCH is missing")
+        textWithColor("params.TAG_OR_BRANCH or GIT_BRANCH is missing", "red")
         echo ex.toString()
     }
    
@@ -57,7 +57,7 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
         writeJSON file: './myConfig.json', json: CONFIG
         bashCommand("cat myConfig.json")
     } catch(Exception ex) {
-        textWithColor("Config Error")
+        textWithColor("Config Error", "red")
         echo ex.toString()
     }
  
@@ -67,7 +67,7 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
         }
     } catch(Exception ex) {
         env.BUILDER_NAME = 'unknown'
-        textWithColor("BuildUser Error")
+        textWithColor("BuildUser Error", "red")
         echo ex.toString()
         getBuildNameFromCommits()
     }

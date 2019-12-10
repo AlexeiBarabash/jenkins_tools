@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+// ssh deploy a docker image, ex: env.CONTAINER_NAME_REPO = redis, env.CONTAINER_NAME = my-redis, env.CONTAINER_RUN_ARGS from buildContainer()
 def call(sshServer, sshUser = 'deploy') {
     textWithColor("Deploy Container To - ${sshUser}@${sshServer}")
     def script = """

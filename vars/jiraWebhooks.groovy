@@ -1,6 +1,5 @@
 #!/usr/bin/env groovy
 import hudson.model.*
-
 def call(integrationIsQa = false) {
     try {
         if(!(env.ENV.toLowerCase() == "qa" || (integrationIsQa && env.ENV.toLowerCase() == 'integration'))) {
@@ -9,20 +8,6 @@ def call(integrationIsQa = false) {
         textWithColor('jiraWebhooks')
         textWithColor('git changes log start')
         def messageForWebhook = "git logs: \n";
-        // def publisher = LastChanges.getLastChangesPublisher "LAST_SUCCESSFUL_BUILD", "SIDE", "LINE", true, true, "", "", "", "", ""
-        // publisher.publishLastChanges()
-        // def changes = publisher.getLastChanges()
-        // println(changes.getEscapedDiff())
-        // for (commit in changes.getCommits()) {
-        //     println(commit)
-        //     def commitInfo = commit.getCommitInfo()
-        //     def message = commitInfo.getCommitMessage()
-        //     println(commitInfo)
-        //     println(message)
-        //     messageForWebhook = messageForWebhook + message + "\n"
-        //     // println(commit.getChanges())
-        // }
-
         def changeLogSets = currentBuild.changeSets
         for (int i = 0; i < changeLogSets.size(); i++) {
             def entries = changeLogSets[i].items
@@ -38,10 +23,10 @@ def call(integrationIsQa = false) {
             httpMode: "POST"
         )
         textWithColor('git webhook end')
-        textWithColor('git changes log end')
+        textWithColor('git changes log end', "green")
         
     } catch(Exception ex) {
-        textWithColor("jiraWebhooks Error")
+        textWithColor("jiraWebhooks Error", "red")
         echo ex.toString()
     }
 }
