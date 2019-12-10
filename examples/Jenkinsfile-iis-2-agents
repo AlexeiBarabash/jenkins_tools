@@ -1,0 +1,68 @@
+@Library('jenkins-shared-lib')_
+env.SLACK_TOKEN = 'VIz90hmMKGILBBTpwI0XYQdR'
+env.SLACK_CH = 'mych'
+env.MSBUILD_OUTPUT_FOLDER = '_PublishedWebsites/mysite.Cms'
+env.CONFIG = """
+{
+   "Integration": {
+      "agentLabel": "mysite-integration",
+      "IIS_FOLDER": "C:/Sites/MySite"
+   },
+   "Qa": {
+      "agentLabel": "mysite-qa1",
+      "IIS_FOLDER": "D:/MySite"
+   }
+}
+"""
+pipeline {
+    agent none
+    options { ansiColor('xterm') }
+    stages {
+        stage('Git Clone') {
+            agent { label 'jenkins-windows' }
+            steps {
+                script {
+                    init(true,true)
+                    printEnv()
+                    gitClone()
+                }
+            }
+        }
+        stage('Build & Publish Artifact') {
+            agent { label 'jenkins-windows' }
+            steps {
+                script {
+                    powershell 'nuget restore'
+                    buildFolderName = "build-${ENV}"
+                    buildCmd = "msbuild /p:OutDir=\"../../${buildFolderName}\"  /p:Configuration=${ENV} /p:TransformConfigFile=true /p:SkipInvalidConfigurations=true /p:DeleteExistingFiles=True"
+                    echo buildCmd
+                    powershell buildCmd
+ 
+                    fileName = "${buildFolderName}.zip"
+                    bashCommand("rm -rf ./${fileName}")
+                    zip dir: "./${buildFolderName}/${env.MSBUILD_OUTPUT_FOLDER}", zipFile: fileName
+                    env.ArtifactUrl = publishZipArtifactToNexus("./${fileName}")
+                    bashCommand("rm -rf ./${fileName}")
+ 
+                    echo "env.ArtifactUrl = ${env.ArtifactUrl}"
+                }
+            }
+        }
+        stage('Download & Update IIS') {
+            agent { label env.agentLabel }
+            options { skipDefaultCheckout true }
+            steps {
+                IIS_DownloadZipToWebsite()
+            }
+        }
+  }
+  post {
+        success { jiraWebhooks(true) }
+        always { 
+            notifyHelper()
+            chuckNorris()
+        }
+    }
+}
+ 
+ 

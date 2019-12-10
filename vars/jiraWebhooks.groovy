@@ -1,6 +1,5 @@
 #!/usr/bin/env groovy
-import hudson.model.*
-def call(integrationIsQa = false) {
+def call(integrationIsQa = false, postLogUrl = 'http://mydaily.codeoasis.com/api/webhooks/gitlogs/?log=') {
     try {
         if(!(env.ENV.toLowerCase() == "qa" || (integrationIsQa && env.ENV.toLowerCase() == 'integration'))) {
             return;
@@ -19,7 +18,7 @@ def call(integrationIsQa = false) {
         textWithColor('git webhook start')
         println(messageForWebhook)
         def response = httpRequest(
-            url: 'http://mydaily.codeoasis.com/api/webhooks/gitlogs/?log=' + URLEncoder.encode(messageForWebhook.replace("&"," and ").replace("\n", "    ")),
+            url: postLogUrl + URLEncoder.encode(messageForWebhook.replace("&"," and ").replace("\n", "    ")),
             httpMode: "POST"
         )
         textWithColor('git webhook end')

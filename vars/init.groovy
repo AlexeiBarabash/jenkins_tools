@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+// in readme have example
 def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
     textWithColor("Init")
     
