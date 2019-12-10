@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def call(checkTriggered = true) {
-    teamsSendHelper(checkTriggered)
-    newSlackSendHelper(checkTriggered)
+def call(checkTriggered = true, ignoreResult = false) {
+    teamsSendHelper(checkTriggered, ignoreResult)
+    newSlackSendHelper(checkTriggered, ignoreResult)
 }
