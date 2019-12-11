@@ -36,7 +36,6 @@ def call(checkTriggered = true, ignoreResult = false) {
         response = httpRequest (consoleLogResponseBody: true,
         contentType: 'APPLICATION_JSON',
         httpMode: 'GET',
-        requestBody: body,
         url: url,
         validResponseCodes: '200')
         textWithColor("newSlackSendHelper success", "green")
