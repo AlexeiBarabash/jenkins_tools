@@ -41,7 +41,7 @@ def call(checkTriggered = true, ignoreResult = false) {
         // url: url,
         // validResponseCodes: '200')
 
-        bashCommand("curl --insecure -v ${url}")
+        bashCommand("curl ${url}")
 
 
         textWithColor("newSlackSendHelper success", "green")
