@@ -3,23 +3,17 @@ def call(checkTriggered = true, ignoreResult = false, slackUrl = 'https://codeoa
     def success = currentBuild.result == 'SUCCESS'
     if(!ignoreResult && currentBuild.result != 'SUCCESS' && currentBuild.result != 'FAILURE')
     {
-        return;
+        return
     }
     if(checkTriggered && !needToTrigger()) {
-        return;
-    }
-    if(isEmpty(env.SLACK_TOKEN)) {
-        textWithColor("env.SLACK_TOKEN is missing", "red")
         return
     }
     if(isEmpty(env.SLACK_CH)) {
         textWithColor("env.SLACK_CH is missing", "red")
         return
     }
+    env.SLACK_TOKEN = 'xoxp-2237703800-870635606503-868348607988-818e501f09e769d9eef109d179f43fa0'
     try {
-        if(isEmpty(env.SLACK_TOKEN)) {
-            env.SLACK_TOKEN = 'xoxp-2237703800-870635606503-868348607988-818e501f09e769d9eef109d179f43fa0'
-        }
         if(isEmpty(env.BRANCH_TO_CLONE)) {
             env.BRANCH_TO_CLONE = 'unknown'
         }
@@ -31,25 +25,19 @@ def call(checkTriggered = true, ignoreResult = false, slackUrl = 'https://codeoa
         
         def message = success ? "*SUCCESSFUL*"  :  "*FAILED*"
         def color =  success ? '#00FF00' : '#FF0000'
-        def body = """
-        {
-            "channel": "${env.SLACK_CH}",
-            "attachments": [
-                {
-                    "color": "${color}",
-                    "text": "${message}",
-                    "footer": "${currentBuild.durationString}",
-                    "title": "${title}",
-                    "title_link": "${title_link}"
-                }
-            ]
-        }
-        """
+
+        def url =  "${slackUrl}?token=" + env.SLACK_TOKEN
+        url = url + "&channel=${env.SLACK_CH}"
+        url = url + "&attachments=[ { \"color\": \"${color}\", \"text\": \"${message}\", \"footer\": \"${currentBuild.durationString}\", \"title\": \"${title}\", \"title_link\": \"${title_link}\" } ]"
+        url = url + "&username=Jenkins"
+        url = url + "&icon_url=https://i.imgur.com/T0O4r13.png"
+        url = URLEncoder.encode(url.replace("\n", "    "))
+
         response = httpRequest (consoleLogResponseBody: true,
         contentType: 'APPLICATION_JSON',
         httpMode: 'POST',
         requestBody: body,
-        url: "${slackUrl}?token=" + env.SLACK_TOKEN,
+        url: url,
         validResponseCodes: '200')
         textWithColor("newSlackSendHelper success", "green")
     } catch(Exception ex) {
