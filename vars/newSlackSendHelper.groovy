@@ -10,7 +10,7 @@ def call(checkTriggered = true, ignoreResult = false) {
     }
     try {
         if(isEmpty(env.SLACK_TOKEN)) {
-            env.SLACK_TOKEN = 'bsQQ1TYnge9gh1f9qqv4DeHU'
+            env.SLACK_TOKEN = 'xoxp-2237703800-870635606503-868348607988-818e501f09e769d9eef109d179f43fa0'
         }
         if(isEmpty(env.BRANCH_TO_CLONE)) {
             env.BRANCH_TO_CLONE = 'unknown'
