@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def call(checkTriggered = true, ignoreResult = false, slackUrl = 'https://codeoasis.slack.com/services/hooks/jenkins-ci') {
+def call(checkTriggered = true, ignoreResult = false) {
     def success = currentBuild.result == 'SUCCESS'
     if(!ignoreResult && currentBuild.result != 'SUCCESS' && currentBuild.result != 'FAILURE')
     {
@@ -26,7 +26,7 @@ def call(checkTriggered = true, ignoreResult = false, slackUrl = 'https://codeoa
         def message = success ? "*SUCCESSFUL*"  :  "*FAILED*"
         def color =  success ? '#00FF00' : '#FF0000'
 
-        def url =  "${slackUrl}?token=" + env.SLACK_TOKEN
+        def url =  "https://slack.com/api/chat.postMessage?token=" + env.SLACK_TOKEN
         url = url + "&channel=${env.SLACK_CH}"
         url = url + "&attachments=[ { \"color\": \"${color}\", \"text\": \"${message}\", \"footer\": \"${currentBuild.durationString}\", \"title\": \"${title}\", \"title_link\": \"${title_link}\" } ]"
         url = url + "&username=Jenkins"
