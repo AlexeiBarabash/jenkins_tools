@@ -11,7 +11,7 @@ def call(siteName) {
             \$appPool | Set-Item
         """
     } catch(Exception ex) {
-        textWithColor("IIS AddPool Error")
+        textWithColor("IIS AddPool Error", "red")
         echo ex.toString()
     }
 }

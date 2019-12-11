@@ -8,16 +8,16 @@ def call(checkTriggered = true, ignoreResult = false) {
     if(checkTriggered && !needToTrigger()) {
         return;
     }
+    if(isEmpty(env.TEAMS_WEBHOOK)) {
+        textWithColor("env.TEAMS_WEBHOOK is missing")
+        return
+    }
     try {
         if(isEmpty(env.BRANCH_TO_CLONE)) {
             env.BRANCH_TO_CLONE = 'unknown'
         }
         if(isEmpty(env.BUILDER_NAME)) {
             env.BUILDER_NAME = 'unknown'
-        }
-        if(isEmpty(env.TEAMS_WEBHOOK)) {
-            textWithColor("env.TEAMS_WEBHOOK is missing")
-            return
         }
         def title = " Job - ${JOB_NAME} *[${env.BRANCH_TO_CLONE}] By -${env.BUILDER_NAME}"
         def title_link = BUILD_URL;
@@ -50,6 +50,9 @@ def call(checkTriggered = true, ignoreResult = false) {
             url: env.TEAMS_WEBHOOK,
             validResponseCodes: '200'
         )
-
-    } catch(Exception ex) {}
+        textWithColor("teamsSendHelper success", "green")
+    } catch(Exception ex) {
+        textWithColor("teamsSendHelper Error", "red")
+        echo ex.toString()
+    }
 }

@@ -37,7 +37,7 @@ def call() {
         powershell "choco install webdeploy -y"
         powershell "choco install urlrewrite -y"
     } catch(Exception ex) {
-        textWithColor("Install IIS Error")
+        textWithColor("Install IIS Error", "red")
         echo ex.toString()
     }
 }

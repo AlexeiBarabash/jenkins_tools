@@ -7,5 +7,5 @@ def call(script,sshServer, sshUser = 'deploy', pass = '') {
         ' > ./script.sh
     """)
     bashCommand("${pass != '' ? "sshpass -p ${pass} " : ""} ssh -o StrictHostKeyChecking=no ${sshUser}@${sshServer} bash -s < ./script.sh")
-    textWithColor("Finished Deploy Container")
+    textWithColor("Finished Deploy Container", "green")
 }

@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+// ex: args =   -p 8001:80 --name example
 def call(args, dockerFile = './Dockerfile', folder = '.') {
     textWithColor("Building Container")
     DOCKER_BUILD_ARGS = ''
@@ -16,5 +17,5 @@ def call(args, dockerFile = './Dockerfile', folder = '.') {
     }
 
     env.DOCKER_BUILD_ARGS = DOCKER_BUILD_ARGS
-    textWithColor("Finished Building Container")
+    textWithColor("Finished Building Container", "green")
 }
