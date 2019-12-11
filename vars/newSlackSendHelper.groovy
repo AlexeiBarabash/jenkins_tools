@@ -33,6 +33,8 @@ def call(checkTriggered = true, ignoreResult = false) {
         url = url + "&icon_url=https://i.imgur.com/T0O4r13.png"
         url = URLEncoder.encode(url.replace("\n", "    "))
 
+        echo url
+
         // response = httpRequest (consoleLogResponseBody: true,
         // contentType: 'APPLICATION_JSON',
         // httpMode: 'GET',
