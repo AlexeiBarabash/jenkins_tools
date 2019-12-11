@@ -35,7 +35,7 @@ def call(checkTriggered = true, ignoreResult = false, slackUrl = 'https://codeoa
 
         response = httpRequest (consoleLogResponseBody: true,
         contentType: 'APPLICATION_JSON',
-        httpMode: 'POST',
+        httpMode: 'GET',
         requestBody: body,
         url: url,
         validResponseCodes: '200')
