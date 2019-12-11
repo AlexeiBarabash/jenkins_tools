@@ -28,7 +28,7 @@ def call(checkTriggered = true, ignoreResult = false) {
         def bashUrl = "https://slack.com/api/chat.postMessage"
         def url =  "?token=" + env.SLACK_TOKEN
         url = url + "&channel=${env.SLACK_CH}"
-        url = url + "&attachments=" + "[ { \"color\": \"${color}\", \"text\": \"${message}\", \"footer\": \"${currentBuild.durationString}\", \"title\": \"${title}\", \"title_link\": \"${title_link}\" } ]"
+        url = url + "&attachments=" + URLEncoder.encode("[ { \"color\": \"${color}\", \"text\": \"${message}\", \"footer\": \"${currentBuild.durationString}\", \"title\": \"${title}\", \"title_link\": \"${title_link}\" } ]")
         url = url + "&username=Jenkins"
         url = url + "&icon_url=https://i.imgur.com/T0O4r13.png"
         url = bashUrl + url
