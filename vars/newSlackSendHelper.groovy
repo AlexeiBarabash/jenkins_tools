@@ -41,10 +41,13 @@ def call(checkTriggered = false, ignoreResult = false) {
         reqUrl = bashUrl + reqUrl
 
         bashCommand(reqUrl)
-
         textWithColor("newSlackSendHelper success", "green")
     } catch(Exception ex) {
-        textWithColor("newSlackSendHelper Error", "red")
-        echo ex.toString()
+        if(ex.toString().indexOf("java.io.NotSerializableException") >= 0) {
+            textWithColor("newSlackSendHelper success", "green")
+        } else {
+            textWithColor("newSlackSendHelper Error", "red")
+            echo ex.toString()
+        }
     }
 }
