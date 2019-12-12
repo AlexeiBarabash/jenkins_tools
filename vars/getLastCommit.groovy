@@ -15,7 +15,7 @@ def call() {
                 lastCommitEntry = needToUpdateMaxDate ? entry : lastCommitEntry
             }
         }
-        res = [
+        def res = [
             date: maxDate,
             msg: lastCommitEntry.msg,
             committer: lastCommitEntry.committer,
