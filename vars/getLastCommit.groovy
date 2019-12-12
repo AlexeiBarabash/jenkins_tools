@@ -15,7 +15,7 @@ def call() {
                 lastCommitEntry = needToUpdateMaxDate ? entry : lastCommitEntry
             }
         }
-        textWithColor("getBuildNameFromCommits done - ${lastCommitEntry}", "green")
+        textWithColor("getBuildNameFromCommits done - ${lastCommitEntry.dump()}", "green")
         return lastCommitEntry
     } catch(Exception ex) {
         env.BUILDER_NAME = 'unknown'

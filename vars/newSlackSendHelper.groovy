@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+@NonCPS
 def call(checkTriggered = true, ignoreResult = false) {
     def success = currentBuild.result == 'SUCCESS'
     if(!ignoreResult && currentBuild.result != 'SUCCESS' && currentBuild.result != 'FAILURE')
