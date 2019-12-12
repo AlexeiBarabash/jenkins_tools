@@ -29,7 +29,7 @@ def call(checkTriggered = false, ignoreResult = false) {
         textWithColor("get last commit")
         def lastCommit = getLastCommit()
         def lastCommitMsg = lastCommit == null  ? "" : lastCommit.msg
-        def message = (success ? "*SUCCESSFUL*"  :  "*FAILED*") + " ${lastCommitMsg}"
+        def message = (success ? "*SUCCESSFUL*"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${lastCommitMsg}"
 
         def color =  success ? '#00FF00' : '#FF0000'
         def bashUrl = "https://slack.com/api/chat.postMessage"
@@ -39,7 +39,7 @@ def call(checkTriggered = false, ignoreResult = false) {
         reqUrl = reqUrl + "&username=Jenkins"
         reqUrl = reqUrl + "&icon_url=https://i.imgur.com/T0O4r13.png"
         reqUrl = bashUrl + reqUrl
-
+        echo currentBuild.rawBuild.getLog(10)
         bashCommand(reqUrl)
         textWithColor("newSlackSendHelper success", "green")
     } catch(Exception ex) {
