@@ -40,11 +40,7 @@ def call(checkTriggered = false, ignoreResult = false) {
         url = url + "&icon_url=https://i.imgur.com/T0O4r13.png"
         url = bashUrl + url
 
-        response = httpRequest (consoleLogResponseBody: true,
-        contentType: 'APPLICATION_JSON',
-        httpMode: 'GET',
-        url: url,
-        validResponseCodes: '200')
+        httpRequest (consoleLogResponseBody: true, httpMode: 'GET', url: url)
 
         textWithColor("newSlackSendHelper success", "green")
     } catch(Exception ex) {
