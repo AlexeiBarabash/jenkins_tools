@@ -20,10 +20,13 @@ def call(checkTriggered = true, ignoreResult = false) {
         if(isEmpty(env.BUILDER_NAME)) {
             env.BUILDER_NAME = 'unknown'
         }
+        
         def title = " Job '${JOB_NAME} *[${env.BRANCH_TO_CLONE}]'* By *${env.BUILDER_NAME}*"
         def title_link = BUILD_URL;
-        
-        def message = success ? "*SUCCESSFUL*"  :  "*FAILED*"
+        def lastCommit = getLastCommit()
+        def lastCommitMsg = lastCommit == null  ? "" : lastCommit.msg
+        def message = (success ? "*SUCCESSFUL*"  :  "*FAILED*") + " ${lastCommitMsg}"
+
         def color =  success ? '#00FF00' : '#FF0000'
         def bashUrl = "https://slack.com/api/chat.postMessage"
         def url =  "?token=" + env.SLACK_TOKEN
