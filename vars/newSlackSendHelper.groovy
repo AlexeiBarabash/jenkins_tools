@@ -5,9 +5,11 @@ def call(checkTriggered = false, ignoreResult = false) {
     def success = currentBuild.result == 'SUCCESS'
     if(!ignoreResult && currentBuild.result != 'SUCCESS' && currentBuild.result != 'FAILURE')
     {
+        textWithColor("dont need to send slack - status = ${currentBuild.result}")
         return
     }
     if(checkTriggered && !needToTrigger()) {
+        textWithColor("dont need to send slack")
         return
     }
     if(isEmpty(env.SLACK_CH)) {
