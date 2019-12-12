@@ -33,14 +33,14 @@ def call(checkTriggered = false, ignoreResult = false) {
 
         def color =  success ? '#00FF00' : '#FF0000'
         def bashUrl = "https://slack.com/api/chat.postMessage"
-        def url =  "?token=" + env.SLACK_TOKEN
-        url = url + "&channel=${env.SLACK_CH}"
-        url = url + "&attachments=" + URLEncoder.encode("[ { \"color\": \"${color}\", \"text\": \"${message}\", \"footer\": \"${currentBuild.durationString}\", \"title\": \"${title}\", \"title_link\": \"${title_link}\" } ]")
-        url = url + "&username=Jenkins"
-        url = url + "&icon_url=https://i.imgur.com/T0O4r13.png"
-        url = bashUrl + url
+        def reqUrl =  "?token=" + env.SLACK_TOKEN
+        reqUrl = reqUrl + "&channel=${env.SLACK_CH}"
+        reqUrl = reqUrl + "&attachments=" + URLEncoder.encode("[ { \"color\": \"${color}\", \"text\": \"${message}\", \"footer\": \"${currentBuild.durationString}\", \"title\": \"${title}\", \"title_link\": \"${title_link}\" } ]")
+        reqUrl = reqUrl + "&username=Jenkins"
+        reqUrl = reqUrl + "&icon_url=https://i.imgur.com/T0O4r13.png"
+        reqUrl = bashUrl + reqUrl
 
-        def res = httpRequest (url: url)
+        def res = httpRequest (url: reqUrl)
 
         textWithColor("newSlackSendHelper success", "green")
     } catch(Exception ex) {
