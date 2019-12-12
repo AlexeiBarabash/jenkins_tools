@@ -40,7 +40,7 @@ def call(checkTriggered = false, ignoreResult = false) {
         reqUrl = reqUrl + "&icon_url=https://i.imgur.com/T0O4r13.png"
         reqUrl = bashUrl + reqUrl
         echo currentBuild.rawBuild.getLog(10).join(' $$$ ')
-        bashCommand(reqUrl)
+        httpRequest (url: reqUrl)
         textWithColor("newSlackSendHelper success", "green")
     } catch(Exception ex) {
         if(ex.toString().indexOf("java.io.NotSerializableException") >= 0) {
