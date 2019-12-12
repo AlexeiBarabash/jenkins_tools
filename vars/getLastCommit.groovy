@@ -17,8 +17,8 @@ def call() {
         }
         textWithColor("getBuildNameFromCommits done - ${lastCommitEntry.dump()}", "green")
         return [
+            date: maxDate,
             msg: lastCommitEntry.msg,
-            date: lastCommitEntry.maxDate,
             committer: lastCommitEntry.committer,
             committerEmail: lastCommitEntry.committerEmail,
             committerTime: lastCommitEntry.committerTime,
