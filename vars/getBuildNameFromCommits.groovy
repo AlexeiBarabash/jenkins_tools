@@ -1,5 +1,4 @@
 #!/usr/bin/env groovy
-@NonCPS
 def call() {
     try {
         textWithColor("getBuildNameFromCommits")
