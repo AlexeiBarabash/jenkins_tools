@@ -29,7 +29,7 @@ def call(checkTriggered = false, ignoreResult = false) {
         textWithColor("get last commit")
         def lastCommit = getLastCommit()
         def lastCommitMsg = lastCommit == null  ? "" : lastCommit.msg
-        def message = (success ? "*SUCCESSFUL*"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${lastCommitMsg}"
+        def message = (success ? "*SUCCESSFUL* -"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${lastCommitMsg}"
 
         def color =  success ? '#00FF00' : '#FF0000'
         def bashUrl = "https://slack.com/api/chat.postMessage"
