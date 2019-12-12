@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 def call() {
     try {
-        textWithColor("getBuildNameFromCommits")
+        textWithColor("getLastCommit")
         def changeLogSets = currentBuild.changeSets
         def maxDate = null
         def lastCommitEntry = null
@@ -15,8 +15,7 @@ def call() {
                 lastCommitEntry = needToUpdateMaxDate ? entry : lastCommitEntry
             }
         }
-        textWithColor("getBuildNameFromCommits done - ${lastCommitEntry.dump()}", "green")
-        return [
+        def res = [
             date: maxDate,
             msg: lastCommitEntry.msg,
             committer: lastCommitEntry.committer,
@@ -34,9 +33,11 @@ def call() {
             showEntireCommitSummaryInChanges: lastCommitEntry.showEntireCommitSummaryInChanges,
             parent: lastCommitEntry.parent
         ]
+        textWithColor("getLastCommit done - ${res.dump()}", "green")
+        return res
     } catch(Exception ex) {
         env.BUILDER_NAME = 'unknown'
-        textWithColor("getBuildNameFromCommits Error", "red")
+        textWithColor("getLastCommit Error", "red")
         echo ex.toString()
         return null
     }
