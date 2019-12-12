@@ -1,6 +1,7 @@
 #!/usr/bin/env groovy
 @NonCPS
 def call(checkTriggered = false, ignoreResult = false) {
+    textWithColor("newSlackSendHelper start")
     def success = currentBuild.result == 'SUCCESS'
     if(!ignoreResult && currentBuild.result != 'SUCCESS' && currentBuild.result != 'FAILURE')
     {
