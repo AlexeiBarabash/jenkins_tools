@@ -16,7 +16,24 @@ def call() {
             }
         }
         textWithColor("getBuildNameFromCommits done - ${lastCommitEntry.dump()}", "green")
-        return lastCommitEntry
+        return [
+            msg: lastCommitEntry.msg
+            date: lastCommitEntry.maxDate
+            committer: lastCommitEntry.committer
+            committerEmail: lastCommitEntry.committerEmail
+            committerTime: lastCommitEntry.committerTime
+            author: lastCommitEntry.author
+            authorEmail: lastCommitEntry.authorEmail
+            authorTime: lastCommitEntry.authorTime
+            comment: lastCommitEntry.comment
+            title: lastCommitEntry.title
+            id: lastCommitEntry.id
+            parentCommit: lastCommitEntry.parentCommit
+            paths: lastCommitEntry.paths
+            authorOrCommitter: lastCommitEntry.authorOrCommitter
+            showEntireCommitSummaryInChanges: lastCommitEntry.showEntireCommitSummaryInChanges
+            parent: lastCommitEntry.parent
+        ]
     } catch(Exception ex) {
         env.BUILDER_NAME = 'unknown'
         textWithColor("getBuildNameFromCommits Error", "red")
