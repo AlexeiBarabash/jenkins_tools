@@ -2,7 +2,7 @@
 def call() {
     try {
         textWithColor("getBuildNameFromCommits")
-        env.BUILDER_NAME = getLastCommit().author
+        env.BUILDER_NAME = isEmpty(env.LastCommitUser) ? 'unknown' : env.LastCommitUser
         textWithColor("getBuildNameFromCommits done - ${env.BUILDER_NAME}", "green")
     } catch(Exception ex) {
         env.BUILDER_NAME = 'unknown'

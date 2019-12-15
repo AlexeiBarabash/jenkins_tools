@@ -17,6 +17,8 @@ def call() {
     bashCommand('git clean -dfx || true')
     bashCommand("ls -latr")
     env.LastCommitMessage = bashCommand("git show -s --format=%s")
-    echo env.LastCommitMessage
+    env.LastCommitHash = bashCommand("git show -s --format=%h")
+    env.LastCommitUser = bashCommand("git show -s --format=%cn")
+    env.LastCommitDate = bashCommand("git show -s --format=%ai")   
     textWithColor("Finish Git Clone - ${BRANCH_TO_CLONE}", "green")
 }
