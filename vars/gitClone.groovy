@@ -29,11 +29,11 @@ def call() {
     env.LastCommitWithoutMerges = "${env.LastCommitWithoutMergesHash} - ${env.LastCommitWithoutMergesDate} - ${env.LastCommitWithoutMergesUser} - ${env.LastCommitWithoutMergesMessage}"
 
     if(env.LastCommitMessage.indexOf("Merge") < 0) {
-        env.LastCommitWithoutMergesMessage ""
-        env.LastCommitWithoutMergesHash ""
-        env.LastCommitWithoutMergesUser ""
-        env.LastCommitWithoutMergesDate ""
-        env.LastCommitWithoutMerges ""
+        env.LastCommitWithoutMergesMessage = ""
+        env.LastCommitWithoutMergesHash = ""
+        env.LastCommitWithoutMergesUser = ""
+        env.LastCommitWithoutMergesDate = ""
+        env.LastCommitWithoutMerges = ""
     }
 
     textWithColor("Finish Git Clone - ${BRANCH_TO_CLONE}", "green")
