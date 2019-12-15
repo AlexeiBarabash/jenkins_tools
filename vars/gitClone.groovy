@@ -16,9 +16,9 @@ def call() {
     bashCommand('git reset --hard || true')
     bashCommand('git clean -dfx || true')
     bashCommand("ls -latr")
-    env.LastCommitMessage = bashCommand("git show -s --format=%s")
-    env.LastCommitHash = bashCommand("git show -s --format=%h")
-    env.LastCommitUser = bashCommand("git show -s --format=%cn")
-    env.LastCommitDate = bashCommand("git show -s --format=%ai")   
+    env.LastCommitMessage = bashCommand("git show -s --format=%s").replace("\n", "")
+    env.LastCommitHash = bashCommand("git show -s --format=%h").replace("\n", "")
+    env.LastCommitUser = bashCommand("git show -s --format=%cn").replace("\n", "")
+    env.LastCommitDate = bashCommand("git show -s --format=%ai").replace("\n", "")
     textWithColor("Finish Git Clone - ${BRANCH_TO_CLONE}", "green")
 }
