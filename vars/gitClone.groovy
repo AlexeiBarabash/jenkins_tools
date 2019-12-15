@@ -16,5 +16,7 @@ def call() {
     bashCommand('git reset --hard || true')
     bashCommand('git clean -dfx || true')
     bashCommand("ls -latr")
+    env.LastCommitMessage = bashCommand("git show -s --format=%s")
+    echo env.LastCommitMessage
     textWithColor("Finish Git Clone - ${BRANCH_TO_CLONE}", "green")
 }
