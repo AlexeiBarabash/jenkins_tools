@@ -20,13 +20,13 @@ def call() {
     env.LastCommitHash = bashCommand("git log -1 --format=%h").replace("\n", "")
     env.LastCommitUser = bashCommand("git log -1 --format=%cn").replace("\n", "")
     env.LastCommitDate = bashCommand("git log -1 --format=%ai").replace("\n", "")
-    env.LastCommit = "${env.LastCommitHash} - ${env.LastCommitDate} - ${env.LastCommitUser} - ${env.LastCommitMessage}"
+    env.LastCommit = "${env.LastCommitHash} - ${env.LastCommitDate} - ${env.LastCommitUser} - ${env.LastCommitMessage}".replace("\n", "")
 
     env.LastCommitWithoutMergesMessage = bashCommand("git log -1 --format=%s --no-merges").replace("\n", "")
     env.LastCommitWithoutMergesHash = bashCommand("git log -1 --format=%h --no-merges").replace("\n", "")
     env.LastCommitWithoutMergesUser = bashCommand("git log -1 --format=%cn --no-merges").replace("\n", "")
     env.LastCommitWithoutMergesDate = bashCommand("git log -1 --format=%ai --no-merges").replace("\n", "")
-    env.LastCommitWithoutMerges = "${env.LastCommitWithoutMergesHash} - ${env.LastCommitWithoutMergesDate} - ${env.LastCommitWithoutMergesUser} - ${env.LastCommitWithoutMergesMessage}"
+    env.LastCommitWithoutMerges = "${env.LastCommitWithoutMergesHash} - ${env.LastCommitWithoutMergesDate} - ${env.LastCommitWithoutMergesUser} - ${env.LastCommitWithoutMergesMessage}".replace("\n", "")
 
     if(env.LastCommitMessage.indexOf("Merge") < 0) {
         env.LastCommitWithoutMergesMessage = ""
