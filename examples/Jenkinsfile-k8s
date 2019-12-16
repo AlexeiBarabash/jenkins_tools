@@ -6,12 +6,12 @@ env.CONFIG = """
 {
    "integration": {
       "DOCKER_REPO": "registry.codeoasis.com:8082",
-      "K8S_APPLY_FILES_GLOB": "k8s/${env.ENV}.yaml",
+      "K8S_APPLY_FILES_GLOB": "k8s/integration.yaml",
       "KUBE_CONFIG_ID": "kubeconfig_codeoasis",
    },
    "qa": {
       "DOCKER_REPO": "registry.codeoasis.com:8082",
-      "K8S_APPLY_FILES_GLOB": "k8s/${env.ENV}.yaml",
+      "K8S_APPLY_FILES_GLOB": "k8s/qa.yaml",
       "KUBE_CONFIG_ID": "kubeconfig_codeoasis",
    },
    "stage": {
