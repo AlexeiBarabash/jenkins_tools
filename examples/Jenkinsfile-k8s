@@ -44,7 +44,7 @@ pipeline {
         }
         stage('Docker Image Tag & Push') {
             steps {
-                buildContainer([ASPNETCORE_ENVIRONMENT: ENV, NODE_ENV: ENV])
+                buildContainer([ASPNETCORE_ENVIRONMENT: env.ENV, NODE_ENV: env.ENV])
             }
         }
         stage('Deploying Image From Repo') {
