@@ -31,7 +31,6 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
         textWithColor('ENV param is must', "red")
         throw new Exception('ENV param is must')
     }
-    ENV = env.ENV
 
     try {
         env.GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
@@ -40,11 +39,11 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
         echo ex.toString()
     }
    
-    textWithColor("Config ${ENV}")
+    textWithColor("Config ${env.ENV}")
     try {
         CONFIG = env.CONFIG ?: ""
         CONFIG = readJSON(text: CONFIG)
-        CONFIG = CONFIG["${ENV}"]
+        CONFIG = CONFIG["${env.ENV}"]
 
         env.CONTAINER_RUN_ARGS = CONFIG.CONTAINER_RUN_ARGS ?: ""
         env.SERVERS = CONFIG.SERVERS ?: ""
@@ -74,7 +73,7 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
     }
 
     
-    env.CONTAINER_NAME = "${env.CONTAINER_NAME}-${ENV}".replace("_", "-")
+    env.CONTAINER_NAME = "${env.CONTAINER_NAME}-${env.ENV}".replace("_", "-")
     env.CONTAINER_VERSION = "${(params.TAG_OR_BRANCH == null) ? BUILD_NUMBER : env.BRANCH_TO_CLONE}"
     env.CONTAINER_NAME_REPO = "${env.DOCKER_REPO}/${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
 }
