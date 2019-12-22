@@ -33,7 +33,7 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
     }
 
     try {
-        env.GIT_REPO = GIT_URL ?: gitlabSourceRepoURL ?: gitlabSourceRepoSshUrl
+        env.GIT_REPO = env.GIT_URL ?: env.gitlabSourceRepoURL ?: env.gitlabSourceRepoSshUrl
     } catch(Exception ex) {
         textWithColor("params.TAG_OR_BRANCH or GIT_BRANCH is missing", "red")
         echo ex.toString()
