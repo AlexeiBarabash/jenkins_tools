@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 // BRANCH_TO_CLONE came from init func
-def call() {
+def call(cleanCache = true) {
     textWithColor("Git Clone - ${BRANCH_TO_CLONE}")
     checkout([$class: 'GitSCM',
         branches: [[name: BRANCH_TO_CLONE]],
@@ -14,7 +14,9 @@ def call() {
     bashCommand("git submodule update --init --recursive || true")
     bashCommand("git submodule foreach 'git checkout ${BRANCH_TO_CLONE} -f || true'")
     bashCommand('git reset --hard || true')
-    bashCommand('git clean -dfx || true')
+    if(cleanCache) {
+        bashCommand('git clean -dfx || true')
+    }
     bashCommand("ls -latr")
     env.LastCommitMessage = bashCommand("git log -1 --format=%s").replace("\n", "")
     env.LastCommitHash = bashCommand("git log -1 --format=%h").replace("\n", "")
