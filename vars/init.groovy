@@ -4,9 +4,9 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
     textWithColor("Init")
     
     try {
-        env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: GIT_BRANCH ?: ""
+        env.BRANCH_TO_CLONE = params.TAG_OR_BRANCH ?: env.GIT_BRANCH ?: ""
     } catch(Exception ex) {
-        textWithColor("params.TAG_OR_BRANCH or GIT_BRANCH is missing", "red")
+        textWithColor("params.TAG_OR_BRANCH or env.GIT_BRANCH is missing", "red")
         echo ex.toString()
         env.BRANCH_TO_CLONE = ''
     }
