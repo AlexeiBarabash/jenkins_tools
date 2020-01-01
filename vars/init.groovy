@@ -45,14 +45,14 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
         CONFIG = readJSON(text: CONFIG)
         CONFIG = CONFIG["${env.ENV}"]
 
-        env.CONTAINER_RUN_ARGS = CONFIG.CONTAINER_RUN_ARGS ?: ""
-        env.SERVERS = CONFIG.SERVERS ?: ""
-        env.DOCKER_REPO = CONFIG.DOCKER_REPO ?: ""
-        env.K8S_APPLY_FILES_GLOB = CONFIG.K8S_APPLY_FILES_GLOB ?: ""
-        env.KUBE_CONFIG_ID = CONFIG.KUBE_CONFIG_ID ?: ""
-        env.agentLabel = CONFIG.agentLabel ?: ""
-        env.isWindows = CONFIG.isWindows ?: "false"
-        env.IIS_FOLDER = CONFIG.IIS_FOLDER ?: ""
+        env.CONTAINER_RUN_ARGS = !isEmpty(CONFIG.CONTAINER_RUN_ARGS) ? CONFIG.CONTAINER_RUN_ARGS :""
+        env.SERVERS = !isEmpty(CONFIG.SERVERS) ? CONFIG.SERVERS :""
+        env.DOCKER_REPO = !isEmpty(CONFIG.DOCKER_REPO) ? CONFIG.DOCKER_REPO :""
+        env.K8S_APPLY_FILES_GLOB = !isEmpty(CONFIG.K8S_APPLY_FILES_GLOB) ? CONFIG.K8S_APPLY_FILES_GLOB :""
+        env.KUBE_CONFIG_ID = !isEmpty(CONFIG.KUBE_CONFIG_ID) ? CONFIG.KUBE_CONFIG_ID :""
+        env.agentLabel = !isEmpty(CONFIG.agentLabel) ? CONFIG.agentLabel :""
+        env.isWindows = !isEmpty(CONFIG.isWindows) ? CONFIG.isWindows :"false"
+        env.IIS_FOLDER = !isEmpty(CONFIG.IIS_FOLDER) ? CONFIG.IIS_FOLDER :""
 
         writeJSON file: './myConfig.json', json: CONFIG
         bashCommand("cat myConfig.json")
