@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 // BRANCH_TO_CLONE came from init func
-def call(cleanCache = true) {
+def call(cleanCache = true, credentialsId = null) {
     textWithColor("Git Clone - ${BRANCH_TO_CLONE}")
     checkout([$class: 'GitSCM',
         branches: [[name: BRANCH_TO_CLONE]],
@@ -8,7 +8,7 @@ def call(cleanCache = true) {
         extensions: [],
         gitTool: 'Default',
         submoduleCfg: [],
-        userRemoteConfigs: [[url: GIT_REPO]]
+        userRemoteConfigs: [[url: GIT_REPO, credentialsId: credentialsId]]
     ])
     textWithColor("Git Clone - Cleans")
     bashCommand("git submodule update --init --recursive || true")
