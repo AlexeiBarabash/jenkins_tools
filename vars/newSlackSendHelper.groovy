@@ -33,7 +33,17 @@ def call(checkTriggered = false, ignoreResult = false) {
         def bashUrl = "https://slack.com/api/chat.postMessage"
         def reqUrl =  "?token=" + env.SLACK_TOKEN
         reqUrl = reqUrl + "&channel=${env.SLACK_CH}"
-        reqUrl = reqUrl + "&attachments=" + URLEncoder.encode("[ { \"color\": \"${color}\", \"text\": \"${message}\", \"footer\": \"${currentBuild.durationString}\", \"title\": \"${title}\", \"title_link\": \"${title_link}\" } ]")
+        reqUrl = reqUrl + "&attachments=" + 
+        def quote = "%22"
+        def attachments = "[{"
+        attachments += "${quote}color${quote}:${quote}${color}${quote},"
+        attachments += "${quote}text${quote}:${quote}${URLEncoder.encode(message)}${quote},"
+        attachments += "${quote}footer${quote}:${quote}${currentBuild.durationString}${quote},"
+        attachments += "${quote}title${quote}:${quote}${title}${quote},"
+        attachments += "${quote}title_link${quote}:${quote}${title_link}${quote}"
+        attachments += "}]"
+
+        
         reqUrl = reqUrl + "&username=Jenkins"
         reqUrl = reqUrl + "&icon_url=https://i.imgur.com/T0O4r13.png"
         reqUrl = bashUrl + reqUrl
