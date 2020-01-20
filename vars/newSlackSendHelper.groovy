@@ -32,9 +32,8 @@ def call(checkTriggered = false, ignoreResult = false) {
         def color =  success ? '#00FF00' : '#FF0000'
         def bashUrl = "https://slack.com/api/chat.postMessage"
         def reqUrl =  "?token=" + env.SLACK_TOKEN
-        reqUrl = reqUrl + "&channel=${env.SLACK_CH}"
-        reqUrl = reqUrl + "&attachments=" + 
         def quote = "%22"
+        reqUrl = reqUrl + "&channel=${env.SLACK_CH}"
         def attachments = "[{"
         attachments += "${quote}color${quote}:${quote}${color}${quote},"
         attachments += "${quote}text${quote}:${quote}${URLEncoder.encode(message)}${quote},"
@@ -42,6 +41,7 @@ def call(checkTriggered = false, ignoreResult = false) {
         attachments += "${quote}title${quote}:${quote}${title}${quote},"
         attachments += "${quote}title_link${quote}:${quote}${title_link}${quote}"
         attachments += "}]"
+        reqUrl = reqUrl + "&attachments=" + attachments
 
         
         reqUrl = reqUrl + "&username=Jenkins"
