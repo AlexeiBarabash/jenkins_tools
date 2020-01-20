@@ -1,22 +1,22 @@
 #!/usr/bin/env groovy
 def call(checkTriggered = false, ignoreResult = false) {
-    textWithColor("newSlackSendHelper start")
-    def success = currentBuild.result == 'SUCCESS'
-    if(!ignoreResult && currentBuild.result != 'SUCCESS' && currentBuild.result != 'FAILURE')
-    {
-        textWithColor("dont need to send slack - status = ${currentBuild.result}")
-        return
-    }
-    if(checkTriggered && !needToTrigger()) {
-        textWithColor("dont need to send slack")
-        return
-    }
-    if(isEmpty(env.SLACK_CH)) {
-        textWithColor("env.SLACK_CH is missing", "red")
-        return
-    }
-    env.SLACK_TOKEN = 'xoxp-2237703800-870635606503-868348607988-818e501f09e769d9eef109d179f43fa0'
     try {
+        textWithColor("newSlackSendHelper start")
+        def success = currentBuild.result == 'SUCCESS'
+        if(!ignoreResult && currentBuild.result != 'SUCCESS' && currentBuild.result != 'FAILURE')
+        {
+            textWithColor("dont need to send slack - status = ${currentBuild.result}")
+            return
+        }
+        if(checkTriggered && !needToTrigger()) {
+            textWithColor("dont need to send slack")
+            return
+        }
+        if(isEmpty(env.SLACK_CH)) {
+            textWithColor("env.SLACK_CH is missing", "red")
+            return
+        }
+        env.SLACK_TOKEN = 'xoxp-2237703800-870635606503-868348607988-818e501f09e769d9eef109d179f43fa0'
         if(isEmpty(env.BRANCH_TO_CLONE)) {
             env.BRANCH_TO_CLONE = 'unknown'
         }
