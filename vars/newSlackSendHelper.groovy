@@ -28,26 +28,24 @@ def call(checkTriggered = false, ignoreResult = false) {
         def title_link = BUILD_URL;
         textWithColor("get last commit")
         def message = (success ? "*SUCCESSFUL* -"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${env.LastCommit} \n ${env.LastCommitWithoutMerges}"
-
         def color =  success ? '#00FF00' : '#FF0000'
-        def bashUrl = "https://slack.com/api/chat.postMessage"
-        def reqUrl =  "?token=" + env.SLACK_TOKEN
-        def quote = "%22"
-        reqUrl = reqUrl + "&channel=${env.SLACK_CH}"
         def attachments = "[{"
-        attachments += "${quote}color${quote}:${quote}${color}${quote},"
-        attachments += "${quote}text${quote}:${quote}${URLEncoder.encode(message)}${quote},"
-        attachments += "${quote}footer${quote}:${quote}${URLEncoder.encode(currentBuild.durationString)}${quote},"
-        attachments += "${quote}title${quote}:${quote}${URLEncoder.encode(title)}${quote},"
-        attachments += "${quote}title_link${quote}:${quote}${URLEncoder.encode(title_link)}${quote}"
+        attachments += "color:${color},"
+        attachments += "text:${message},"
+        attachments += "footer:${currentBuild.durationString},"
+        attachments += "title:${title},"
+        attachments += "title_link:${title_link}"
         attachments += "}]"
-        reqUrl = reqUrl + "&attachments=" + attachments
 
-        
-        reqUrl = reqUrl + "&username=Jenkins"
-        reqUrl = reqUrl + "&icon_url=https://i.imgur.com/T0O4r13.png"
-        reqUrl = bashUrl + reqUrl
-        httpRequest (url: reqUrl)
+        def curlCmd = """
+            curl "https://slack.com/api/chat.postMessage" \
+            -d username="Jenkins" \
+            -d icon_url="https://i.imgur.com/T0O4r13.png" \
+            -d token="${env.SLACK_TOKEN}" \
+            -d channel="${env.SLACK_CH}" \
+            -d attachments="${attachments}"
+        """
+        bashCommand (curlCmd)
         
         textWithColor("newSlackSendHelper success", "green")
     } catch(Exception ex) {
