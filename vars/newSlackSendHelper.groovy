@@ -29,12 +29,13 @@ def call(checkTriggered = false, ignoreResult = false) {
         textWithColor("get last commit")
         def text = (success ? "*SUCCESSFUL* -"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${env.LastCommit} \n ${env.LastCommitWithoutMerges}".replace("\n","\\n")
         def color =  success ? '#00FF00' : '#FF0000'
+        def jsonQuote = "\\\""
         def attachments = "[{"
-        attachments += "\\\"color\\\":\\\"${color}\\\","
-        attachments += "\\\"text\":\\\"${text}\\\","
-        attachments += "\\\"footer\\\":\\\"${currentBuild.durationString}\\\","
-        attachments += "\\\"title\\\":\\\"${title}\\\","
-        attachments += "\\\"title_link\\\":\\\"${title_link}\\\""
+        attachments += "${jsonQuote}color${jsonQuote}:${jsonQuote}${color}${jsonQuote},"
+        attachments += "${jsonQuote}text${jsonQuote}:${jsonQuote}${text}${jsonQuote},"
+        attachments += "${jsonQuote}footer${jsonQuote}:${jsonQuote}${currentBuild.durationString}${jsonQuote},"
+        attachments += "${jsonQuote}title${jsonQuote}:${jsonQuote}${title}${jsonQuote},"
+        attachments += "${jsonQuote}title_link${jsonQuote}:${jsonQuote}${title_link}${jsonQuote}"
         attachments += "}]"
 
         def scriptFile = "./script.sh"
