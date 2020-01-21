@@ -48,6 +48,7 @@ def call(checkTriggered = false, ignoreResult = false) {
             -d channel=\"${env.SLACK_CH}\" \\
             -d attachments=\"${attachments}\"' > ${scriptFile}
         """)
+        bashCommand ("chmod 777 " + scriptFile)
         bashCommand (scriptFile)
 
         textWithColor("newSlackSendHelper success", "green")
