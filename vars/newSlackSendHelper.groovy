@@ -30,20 +30,20 @@ def call(checkTriggered = false, ignoreResult = false) {
         def message = (success ? "*SUCCESSFUL* -"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${env.LastCommit} \n ${env.LastCommitWithoutMerges}"
         def color =  success ? '#00FF00' : '#FF0000'
         def attachments = "[{"
-        attachments += "color:${color},"
-        attachments += "text:${message},"
-        attachments += "footer:${currentBuild.durationString},"
-        attachments += "title:${title},"
-        attachments += "title_link:${title_link}"
+        attachments += "\"color\":\"${color}\","
+        attachments += "\"text\":\"${message}\","
+        attachments += "\"footer\":\"${currentBuild.durationString}\","
+        attachments += "\"title\":\"${title}\","
+        attachments += "\"title_link\":\"${title_link}\""
         attachments += "}]"
 
         def curlCmd = """
-            curl "https://slack.com/api/chat.postMessage" \
-            -d username="Jenkins" \
-            -d icon_url="https://i.imgur.com/T0O4r13.png" \
-            -d token="${env.SLACK_TOKEN}" \
-            -d channel="${env.SLACK_CH}" \
-            -d attachments="${attachments}"
+            curl \"https://slack.com/api/chat.postMessage\" \\
+            -d username=\"Jenkins\" \\
+            -d icon_url=\"https://i.imgur.com/T0O4r13.png\" \\
+            -d token=\"${env.SLACK_TOKEN}\" \\
+            -d channel=\"${env.SLACK_CH}\" \\
+            -d attachments=\"${attachments}\"
         """
         bashCommand (curlCmd)
         
