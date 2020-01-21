@@ -30,11 +30,11 @@ def call(checkTriggered = false, ignoreResult = false) {
         def text = (success ? "*SUCCESSFUL* -"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${env.LastCommit} \n ${env.LastCommitWithoutMerges}".replace("\n","\\n")
         def color =  success ? '#00FF00' : '#FF0000'
         def attachments = "[{"
-        attachments += "\"color\":\"${color}\","
-        attachments += "\"text\":\"${text}\","
-        attachments += "\"footer\":\"${currentBuild.durationString}\","
-        attachments += "\"title\":\"${title}\","
-        attachments += "\"title_link\":\"${title_link}\""
+        attachments += "\\\"color\\\":\\\"${color}\\\","
+        attachments += "\\\"text\":\\\"${text}\\\","
+        attachments += "\\\"footer\\\":\\\"${currentBuild.durationString}\\\","
+        attachments += "\\\"title\\\":\\\"${title}\\\","
+        attachments += "\\\"title_link\\\":\\\"${title_link}\\\""
         attachments += "}]"
 
         def scriptFile = "./script.sh"
