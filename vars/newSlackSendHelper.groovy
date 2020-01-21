@@ -37,9 +37,9 @@ def call(checkTriggered = false, ignoreResult = false) {
         def attachments = "[{"
         attachments += "${quote}color${quote}:${quote}${color}${quote},"
         attachments += "${quote}text${quote}:${quote}${URLEncoder.encode(message)}${quote},"
-        attachments += "${quote}footer${quote}:${quote}${currentBuild.durationString}${quote},"
-        attachments += "${quote}title${quote}:${quote}${title}${quote},"
-        attachments += "${quote}title_link${quote}:${quote}${title_link}${quote}"
+        attachments += "${quote}footer${quote}:${quote}${URLEncoder.encode(currentBuild.durationString)}${quote},"
+        attachments += "${quote}title${quote}:${quote}${URLEncoder.encode(title)}${quote},"
+        attachments += "${quote}title_link${quote}:${quote}${URLEncoder.encode(title_link)}${quote}"
         attachments += "}]"
         reqUrl = reqUrl + "&attachments=" + attachments
 
