@@ -27,7 +27,7 @@ def call(checkTriggered = false, ignoreResult = false) {
         def title = " Job '${JOB_NAME} *[${env.BRANCH_TO_CLONE}]'* By *${env.BUILDER_NAME}*"
         def title_link = BUILD_URL;
         textWithColor("get last commit")
-        def text = (success ? "*SUCCESSFUL* -"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${env.LastCommit} \\n ${env.LastCommitWithoutMerges}"
+        def text = (success ? "*SUCCESSFUL* -"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${env.LastCommit} \n ${env.LastCommitWithoutMerges}".replace("\n","\\n")
         def color =  success ? '#00FF00' : '#FF0000'
         def attachments = "[{"
         attachments += "\"color\":\"${color}\","
