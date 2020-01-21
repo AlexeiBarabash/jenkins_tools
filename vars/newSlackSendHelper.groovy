@@ -37,16 +37,18 @@ def call(checkTriggered = false, ignoreResult = false) {
         attachments += "\"title_link\":\"${title_link}\""
         attachments += "}]"
 
-        def curlCmd = """
+        def scriptFile = "./script.sh"
+        bashCommand("""
+        echo '
             curl \"https://slack.com/api/chat.postMessage\" \\
             -d username=\"Jenkins\" \\
             -d icon_url=\"https://i.imgur.com/T0O4r13.png\" \\
             -d token=\"${env.SLACK_TOKEN}\" \\
             -d channel=\"${env.SLACK_CH}\" \\
-            -d attachments=\"${attachments}\"
-        """
-        bashCommand (curlCmd)
-        
+            -d attachments=\"${attachments}\"' > ${scriptFile}
+        """)
+        bashCommand (scriptFile)
+
         textWithColor("newSlackSendHelper success", "green")
     } catch(Exception ex) {
         if(ex.toString().indexOf("java.io.NotSerializableException") >= 0) {
