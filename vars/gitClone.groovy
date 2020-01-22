@@ -17,6 +17,7 @@ def call(cleanCache = true, credentialsId = null) {
     if(cleanCache) {
         bashCommand('git clean -dfx || true')
     }
+    bashCommand("git submodule foreach 'git pull -f || true'")
     bashCommand("ls -latr")
     env.LastCommitMessage = bashCommand("git log -1 --format=%s").replace("\n", "")
     env.LastCommitHash = bashCommand("git log -1 --format=%h").replace("\n", "")
