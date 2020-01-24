@@ -11,7 +11,9 @@ def call(cleanCache = true, credentialsId = null) {
         userRemoteConfigs: [[url: GIT_REPO, credentialsId: credentialsId]]
     ])
     textWithColor("Git Clone - Cleans")
-    bashCommand('git reset --hard || true')
+    bashCommand('git tag -d $(git tag -l)')
+    bashCommand("git submodule foreach 'git tag -d $(git tag -l)'")
+    bashCommand('git reset --hard')
     if(cleanCache) {
         bashCommand('git clean -dfx || true')
     }
