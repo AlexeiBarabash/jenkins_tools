@@ -12,7 +12,7 @@ def call(cleanCache = true, credentialsId = null) {
     ])
     textWithColor("Git Clone - Cleans")
     bashCommand('git tag -d $(git tag -l)')
-    bashCommand("git submodule foreach 'git tag -d $(git tag -l)'")
+    bashCommand("git submodule foreach 'git tag -d \$(git tag -l)'")
     bashCommand('git reset --hard')
     if(cleanCache) {
         bashCommand('git clean -dfx || true')
