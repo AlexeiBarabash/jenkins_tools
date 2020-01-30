@@ -11,12 +11,16 @@ def call(cleanCache = true, credentialsId = null) {
         userRemoteConfigs: [[url: GIT_REPO, credentialsId: credentialsId]]
     ])
     textWithColor("Git Clone - Cleans")
-    bashCommand("git submodule update --init --recursive || true")
-    bashCommand("git submodule foreach 'git checkout ${BRANCH_TO_CLONE} -f || true'")
-    bashCommand('git reset --hard || true')
+    bashCommand('git tag -d $(git tag -l)')
+    bashCommand("git submodule foreach 'git tag -d \$(git tag -l)'")
+    bashCommand('git reset --hard')
     if(cleanCache) {
         bashCommand('git clean -dfx || true')
     }
+    textWithColor("Git Clone - Fetch & Pull")
+    bashCommand("git submodule update --init --recursive || true")
+    bashCommand("git submodule foreach 'git fetch --all || true'")
+    bashCommand("git submodule foreach 'git checkout ${BRANCH_TO_CLONE} -f || true'")
     bashCommand("git submodule foreach 'git pull -f || true'")
     bashCommand("ls -latr")
     env.LastCommitMessage = bashCommand("git log -1 --format=%s").replace("\n", "")
