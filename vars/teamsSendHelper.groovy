@@ -3,10 +3,10 @@ def call(checkTriggered = true, ignoreResult = false) {
     def success = currentBuild.result == 'SUCCESS'
     if(!ignoreResult && currentBuild.result != 'SUCCESS' && currentBuild.result != 'FAILURE')
     {
-        return;
+        return
     }
     if(checkTriggered && !needToTrigger()) {
-        return;
+        return
     }
     if(isEmpty(env.TEAMS_WEBHOOK)) {
         textWithColor("env.TEAMS_WEBHOOK is missing")
@@ -20,7 +20,7 @@ def call(checkTriggered = true, ignoreResult = false) {
             env.BUILDER_NAME = 'unknown'
         }
         def title = " Job - ${JOB_NAME} *[${env.BRANCH_TO_CLONE}] By -${env.BUILDER_NAME}"
-        def title_link = BUILD_URL;
+        def title_link = BUILD_URL
         def message = success ? "**SUCCESSFUL**"  :  "**FAILED**"
         def color =  success ? '00FF00' : 'FF0000'
         message = message + " - takes - ${currentBuild.durationString}"

@@ -2,7 +2,12 @@
 def call(integrationIsQa = false, postLogUrl = 'http://mydaily.codeoasis.com/api/webhooks/gitlogs/?log=') {
     try {
         if(!(env.ENV.toLowerCase() == "qa" || (integrationIsQa && env.ENV.toLowerCase() == 'integration'))) {
-            return;
+            return
+        }
+        if(currentBuild.result != 'SUCCESS')
+        {
+            textWithColor("dont need to webhook - status = ${currentBuild.result}")
+            return
         }
         textWithColor('jiraWebhooks')
         textWithColor('git changes log start')
@@ -10,7 +15,7 @@ def call(integrationIsQa = false, postLogUrl = 'http://mydaily.codeoasis.com/api
         logRows = logRows < 10 ? 10 : logRows*2
         bashCommand("git log -${logRows} --pretty=format:%s > gitlog.txt")
         def gitlog = bashCommand('cat gitlog.txt')
-        def messageForWebhook = "git logs: \n" + gitlog;
+        def messageForWebhook = "git logs: \n" + gitlog
         textWithColor('git webhook start')
         println(messageForWebhook)
         def response = httpRequest(
