@@ -37,13 +37,14 @@ def call(checkTriggered = false, ignoreResult = false) {
         attachments += "${jsonQuote}title${jsonQuote}:${jsonQuote}${title}${jsonQuote},"
         attachments += "${jsonQuote}title_link${jsonQuote}:${jsonQuote}${title_link}${jsonQuote}"
         attachments += "}]"
+        def image = success ? "https://i.imgur.com/T0O4r13.png" : "https://i.imgur.com/f2V8vlc.png"
 
         def scriptFile = "./script.sh"
         bashCommand("""
         echo '
             curl \"https://slack.com/api/chat.postMessage\" \\
             -d username=\"Jenkins\" \\
-            -d icon_url=\"https://i.imgur.com/T0O4r13.png\" \\
+            -d icon_url=\"${image}\" \\
             -d token=\"${env.SLACK_TOKEN}\" \\
             -d channel=\"${env.SLACK_CH}\" \\
             -d attachments=\"${attachments}\"' > ${scriptFile}
