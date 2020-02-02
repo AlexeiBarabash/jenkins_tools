@@ -35,7 +35,7 @@ def call(checkTriggered = false, ignoreResult = true) {
             "attachments": [
                 {
                     "color": "${success ? '#00FF00' : '#FF0000'}",
-                    "text":" "${text}",
+                    "text": "${text}",
                     "footer": "takes ${currentBuild.durationString}",
                     "title": "${title}",
                     "title_link": "${BUILD_URL}"
