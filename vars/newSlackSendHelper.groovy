@@ -49,7 +49,7 @@ def call(checkTriggered = false, ignoreResult = true) {
             requestBody: body,
             url: "https://slack.com/api/chat.postMessage",
             customHeaders: [
-                [maskValue: false, name: 'Authentication', value: bearerToken],
+                [maskValue: false, name: 'Authorization', value: bearerToken],
                 [maskValue: false, name: 'Content-Type', value: 'application/json']
             ]
         )
