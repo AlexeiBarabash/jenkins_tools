@@ -43,7 +43,7 @@ def call(checkTriggered = false, ignoreResult = true) {
         }
         """
 
-        def bearerToken = 'Bearer xoxp-2237703800-870635606503-932604843876-3288ccc2106f363b9390d9325b923c5e'
+        def bearerToken = "Bearer ${env.GLOBAL_SLACK_TOKEN}"
         response = httpRequest ( consoleLogResponseBody: true,
             httpMode: 'POST',
             requestBody: body,
