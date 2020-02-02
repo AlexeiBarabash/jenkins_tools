@@ -42,13 +42,13 @@ def call(checkTriggered = false, ignoreResult = true) {
         textWithColor("curl script")
         def scriptFile = "./script.sh"
         bashCommand("""
-        echo '
+        echo "
             curl \"https://slack.com/api/chat.postMessage\" \\
             -d username=\"Jenkins\" \\
             -d icon_url=\"${image}\" \\
             -d token=\"${env.SLACK_TOKEN}\" \\
             -d channel=\"${env.SLACK_CH}\" \\
-            -d attachments=\"${attachments}\"' > ${scriptFile}
+            -d attachments=\"${attachments}\"" > ${scriptFile}
         """)
         bashCommand("ls -latr")
         bashCommand("chmod 777 " + scriptFile)
