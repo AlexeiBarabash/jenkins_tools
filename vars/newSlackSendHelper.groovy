@@ -39,6 +39,7 @@ def call(checkTriggered = false, ignoreResult = true) {
         attachments += "}]"
         def image = success ? "https://i.imgur.com/T0O4r13.png" : "https://i.imgur.com/f2V8vlc.png"
 
+        textWithColor("curl script")
         def scriptFile = "./script.sh"
         bashCommand("""
         echo '
