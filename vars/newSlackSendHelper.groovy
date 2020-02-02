@@ -50,12 +50,9 @@ def call(checkTriggered = false, ignoreResult = true) {
             -d channel=\"${env.SLACK_CH}\" \\
             -d attachments=\"${attachments}\"' > ${scriptFile}
         """)
-
-        try {
-            bashCommand ("chmod 777 " + scriptFile)
-        } catch(Exception ex) {}
-        
-        bashCommand (scriptFile)
+        bashCommand("ls -latr")
+        bashCommand("chmod 777 " + scriptFile)
+        bashCommand(scriptFile)
         textWithColor("newSlackSendHelper success", "green")
     } catch(Exception ex) {
         if(ex.toString().indexOf("java.io.NotSerializableException") >= 0) {
