@@ -23,7 +23,6 @@ def call(checkTriggered = false, ignoreResult = true) {
             env.BUILDER_NAME = 'unknown'
         }
 
-        env.SLACK_TOKEN = 'xoxp-2237703800-870635606503-868348607988-818e501f09e769d9eef109d179f43fa0'
         def title = " Job '${JOB_NAME} *[${env.BRANCH_TO_CLONE}]'* By *${env.BUILDER_NAME}*"
         textWithColor("get last commit")
         def text = (success ? "*SUCCESSFUL* -"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${env.LastCommit} \n ${env.LastCommitWithoutMerges}".replace("\n","\\n")
@@ -43,12 +42,14 @@ def call(checkTriggered = false, ignoreResult = true) {
             ]
         }
         """
+
+        def bearerToken = 'Bearer xoxp-2237703800-870635606503-868348607988-818e501f09e769d9eef109d179f43fa0'
         response = httpRequest ( consoleLogResponseBody: true,
             contentType: 'APPLICATION_JSON',
             httpMode: 'POST',
             requestBody: body,
             url: "https://slack.com/api/chat.postMessage",
-            validResponseCodes: '200'
+            customHeaders: [[maskValue: false, name: 'Authentication', value: bearerToken]]
         )
 
         textWithColor("newSlackSendHelper success", "green")
