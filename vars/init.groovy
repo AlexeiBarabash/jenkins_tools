@@ -51,7 +51,6 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
         env.K8S_APPLY_FILES_GLOB = !isEmpty(CONFIG.K8S_APPLY_FILES_GLOB) ? CONFIG.K8S_APPLY_FILES_GLOB :""
         env.KUBE_CONFIG_ID = !isEmpty(CONFIG.KUBE_CONFIG_ID) ? CONFIG.KUBE_CONFIG_ID :""
         env.agentLabel = !isEmpty(CONFIG.agentLabel) ? CONFIG.agentLabel :""
-        env.isWindows = !isEmpty(CONFIG.isWindows) ? CONFIG.isWindows :"false"
         env.IIS_FOLDER = !isEmpty(CONFIG.IIS_FOLDER) ? CONFIG.IIS_FOLDER :""
 
         writeJSON file: './myConfig.json', json: CONFIG
