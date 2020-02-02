@@ -43,7 +43,7 @@ def call(checkTriggered = false, ignoreResult = true) {
         }
         """
 
-        def bearerToken = 'Bearer xoxp-2237703800-870635606503-868348607988-818e501f09e769d9eef109d179f43fa0'
+        def bearerToken = 'Bearer xoxp-2237703800-870635606503-920268694274-67069ad0276b1d53b9bb331814f4b75e'
         response = httpRequest ( consoleLogResponseBody: true,
             httpMode: 'POST',
             requestBody: body,
