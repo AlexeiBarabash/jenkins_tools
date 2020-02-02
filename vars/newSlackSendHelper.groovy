@@ -49,11 +49,7 @@ def call(checkTriggered = false, ignoreResult = true) {
             -d attachments=\"${attachments}\"
         """
         echo script
-        textWithColor("newSlackSendHelper - create script file file")
-        bashCommand(" echo '${script}' > ${scriptFile} ")
-        bashCommand("ls -atr")
-        bashCommand("chmod 777 " + scriptFile)
-        bashCommand(scriptFile)
+        bashCommand(script)
         textWithColor("newSlackSendHelper success", "green")
     } catch(Exception ex) {
         if(ex.toString().indexOf("java.io.NotSerializableException") >= 0) {
