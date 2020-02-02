@@ -10,7 +10,8 @@ def call(cmd) {
     try {
         def res = null
         if(isWindows) {
-            res = powershell (returnStdout: true, script:"C:\\\"Program Files\"\\Git\\bin\\bash.exe -c \"${cmd}\"")
+            res = powershell ("echo \'${cmd}\' > ./tmpScript.sh ")
+            res = powershell (returnStdout: true, script:"C:\\\"Program Files\"\\Git\\bin\\bash.exe -c \"./tmpScript.sh\"")
         } else {
             res = sh(returnStdout: true, script:cmd)
         }
