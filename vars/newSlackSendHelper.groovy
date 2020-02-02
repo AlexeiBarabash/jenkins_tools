@@ -45,7 +45,7 @@ def call(checkTriggered = false, ignoreResult = true) {
         script += " -d icon_url=${image} "
         script += " -d token=${env.SLACK_TOKEN} "
         script += " -d channel=${env.SLACK_CH} "
-        script += " -d attachments=\"${attachments}\ "
+        script += " -d attachments=\"${attachments}\" "
         echo script
 
         bashCommand(script)
