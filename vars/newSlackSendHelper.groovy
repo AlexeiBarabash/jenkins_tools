@@ -48,7 +48,10 @@ def call(checkTriggered = false, ignoreResult = true) {
             httpMode: 'POST',
             requestBody: body,
             url: "https://slack.com/api/chat.postMessage",
-            customHeaders: [[maskValue: false, name: 'Authentication', value: bearerToken]]
+            customHeaders: [
+                [maskValue: false, name: 'Authentication', value: bearerToken],
+                [maskValue: false, name: 'Content-Type', value: 'application/json']
+            ]
         )
 
         textWithColor("newSlackSendHelper success", "green")
