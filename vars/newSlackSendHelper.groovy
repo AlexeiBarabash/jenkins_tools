@@ -49,7 +49,8 @@ def call(checkTriggered = false, ignoreResult = true) {
             -d attachments=\"${attachments}\"
         """
         echo script
-        bashCommand(" echo '${script}'  > ${scriptFile} ")
+        textWithColor("newSlackSendHelper - create script file file")
+        bashCommand(" echo '${script}' > ${scriptFile} ")
         bashCommand("ls -atr")
         bashCommand("chmod 777 " + scriptFile)
         bashCommand(scriptFile)
