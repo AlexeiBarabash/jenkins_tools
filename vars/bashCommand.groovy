@@ -11,8 +11,11 @@ def call(cmd) {
         def res = null
         if(isWindows) {
             cmd = cmd.replace('"','\\"')
-            res = powershell (returnStdout: true, script:"C:\\\"Program Files\"\\Git\\bin\\bash.exe -c \"${cmd}\"")
+            cmd = "C:\\\"Program Files\"\\Git\\bin\\bash.exe -c \"${cmd}\""
+            echo cmd
+            res = powershell (returnStdout: true, script:)
         } else {
+            echo cmd
             res = sh(returnStdout: true, script:cmd)
         }
         echo res
