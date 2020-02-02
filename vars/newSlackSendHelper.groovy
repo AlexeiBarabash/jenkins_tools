@@ -26,6 +26,7 @@ def call(checkTriggered = false, ignoreResult = true) {
         def title = " Job '${JOB_NAME} *[${env.BRANCH_TO_CLONE}]'* By *${env.BUILDER_NAME}*"
         textWithColor("get last commit")
         def text = (success ? "*SUCCESSFUL* -"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${env.LastCommit} \n ${env.LastCommitWithoutMerges}".replace("\n","\\n")
+        text = text.trim().replace("\n","\\n").trim()
         def body = """
         {
             "username": "Jenkins",
@@ -35,13 +36,15 @@ def call(checkTriggered = false, ignoreResult = true) {
                 {
                     "color": "${success ? '#00FF00' : '#FF0000'}",
                     "text":" "${text}",
-                    "footer": "${currentBuild.durationString}",
+                    "footer": "takes ${currentBuild.durationString}",
                     "title": "${title}",
                     "title_link": "${BUILD_URL}"
                 }
             ]
         }
         """
+
+        echo body
 
         def bearerToken = "Bearer ${env.GLOBAL_SLACK_TOKEN}"
         response = httpRequest ( consoleLogResponseBody: true,
