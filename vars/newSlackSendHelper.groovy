@@ -24,7 +24,7 @@ def call(checkTriggered = false, ignoreResult = true) {
             env.BUILDER_NAME = 'unknown'
         }
         
-        def title = " Job '${JOB_NAME} *[${env.BRANCH_TO_CLONE}]'* By *${env.BUILDER_NAME}*"
+        def title = " Job \'${JOB_NAME} *[${env.BRANCH_TO_CLONE}]\'* By *${env.BUILDER_NAME}*"
         def title_link = BUILD_URL
         textWithColor("get last commit")
         def text = (success ? "*SUCCESSFUL* -"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${env.LastCommit} \n ${env.LastCommitWithoutMerges}".replace("\n","\\n")
@@ -39,7 +39,6 @@ def call(checkTriggered = false, ignoreResult = true) {
         attachments += "}]"
         def image = success ? "https://i.imgur.com/T0O4r13.png" : "https://i.imgur.com/f2V8vlc.png"
         textWithColor("curl script")
-        def scriptFile = "./script.sh"
         def script = """
             curl \"https://slack.com/api/chat.postMessage\" \\
             -d username=\"Jenkins\" \\
@@ -50,7 +49,7 @@ def call(checkTriggered = false, ignoreResult = true) {
         """
         echo script
         textWithColor("newSlackSendHelper - create script file file")
-        bashCommand(" echo '${script}' > ${scriptFile} ")
+        bashCommand(" echo '${script}' > ./script.sh ")
         bashCommand("ls -atr")
         bashCommand("chmod 777 " + scriptFile)
         bashCommand(scriptFile)
