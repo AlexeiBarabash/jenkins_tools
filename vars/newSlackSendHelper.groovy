@@ -40,12 +40,12 @@ def call(checkTriggered = false, ignoreResult = true) {
         def image = success ? "https://i.imgur.com/T0O4r13.png" : "https://i.imgur.com/f2V8vlc.png"
         textWithColor("curl script")
         def script = """
-            curl \"https://slack.com/api/chat.postMessage\" \\
-            -d username=\"Jenkins\" \\
-            -d icon_url=\"${image}\" \\
-            -d token=\"${env.SLACK_TOKEN}\" \\
-            -d channel=\"${env.SLACK_CH}\" \\
-            -d attachments=\"${attachments}\"
+            curl \\\"https://slack.com/api/chat.postMessage\\\" \\
+            -d username=\\\"Jenkins\\\" \\
+            -d icon_url=\\\"${image}\\\" \\
+            -d token=\\\"${env.SLACK_TOKEN}\\\" \\
+            -d channel=\\\"${env.SLACK_CH}\\\" \\
+            -d attachments=\\\"${attachments}\\\"
         """
         echo script
         textWithColor("newSlackSendHelper - create script file file")
