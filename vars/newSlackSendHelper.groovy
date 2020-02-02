@@ -45,7 +45,6 @@ def call(checkTriggered = false, ignoreResult = true) {
 
         def bearerToken = 'Bearer xoxp-2237703800-870635606503-868348607988-818e501f09e769d9eef109d179f43fa0'
         response = httpRequest ( consoleLogResponseBody: true,
-            contentType: 'APPLICATION_JSON',
             httpMode: 'POST',
             requestBody: body,
             url: "https://slack.com/api/chat.postMessage",
