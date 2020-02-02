@@ -43,14 +43,14 @@ def call(checkTriggered = false, ignoreResult = true) {
         }
         """
 
-        def bearerToken = 'Bearer xoxp-2237703800-870635606503-933058739456-6ce8918124d75c12dbf8f32a6a662146'
+        def bearerToken = 'Bearer xoxp-2237703800-870635606503-932604843876-3288ccc2106f363b9390d9325b923c5e'
         response = httpRequest ( consoleLogResponseBody: true,
             httpMode: 'POST',
             requestBody: body,
             url: "https://slack.com/api/chat.postMessage",
             customHeaders: [
-                [maskValue: false, name: 'Authorization', value: bearerToken],
-                [maskValue: false, name: 'Content-Type', value: 'application/json; charset=utf-8']
+                [name: 'Authorization', value: bearerToken],
+                [name: 'Content-Type', value: 'application/json; charset=utf-8']
             ]
         )
 
