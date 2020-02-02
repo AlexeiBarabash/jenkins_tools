@@ -41,11 +41,11 @@ def call(checkTriggered = false, ignoreResult = true) {
 
         textWithColor("curl script")
         def script = """curl \"https://slack.com/api/chat.postMessage\" \\
-            -d username=\"Jenkins\" \\
-            -d icon_url=\"${image}\" \\
-            -d token=\"${env.SLACK_TOKEN}\" \\
-            -d channel=\"${env.SLACK_CH}\" \\
-            -d attachments=\"${attachments}\"
+-d username=\"Jenkins\" \\
+-d icon_url=\"${image}\" \\
+-d token=\"${env.SLACK_TOKEN}\" \\
+-d channel=\"${env.SLACK_CH}\" \\
+-d attachments=\"${attachments}\"
         """
         echo script
         bashCommand(script)
