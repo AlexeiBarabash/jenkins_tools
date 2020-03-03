@@ -10,6 +10,7 @@ env.CONFIG = """
    },
    "Qa": {
       "agentLabel": "mysite-qa1",
+      "agentLabel2": "mysite-qa2",
       "IIS_FOLDER": "D:/MySite"
    }
 }
@@ -50,6 +51,14 @@ pipeline {
         }
         stage('Download & Update IIS') {
             agent { label env.agentLabel }
+            options { skipDefaultCheckout true }
+            steps {
+                IIS_DownloadZipToWebsite()
+            }
+        }
+        stage('Download & Update IIS Agent2') {
+            when { expression { !isEmpty(env.agentLabel2) } }
+            agent { label env.agentLabel2 }
             options { skipDefaultCheckout true }
             steps {
                 IIS_DownloadZipToWebsite()
