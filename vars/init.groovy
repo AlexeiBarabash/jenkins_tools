@@ -51,6 +51,7 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
         env.K8S_APPLY_FILES_GLOB = !isEmpty(CONFIG.K8S_APPLY_FILES_GLOB) ? CONFIG.K8S_APPLY_FILES_GLOB :""
         env.KUBE_CONFIG_ID = !isEmpty(CONFIG.KUBE_CONFIG_ID) ? CONFIG.KUBE_CONFIG_ID :""
         env.agentLabel = !isEmpty(CONFIG.agentLabel) ? CONFIG.agentLabel :""
+        env.agentLabel2 = !isEmpty(CONFIG.agentLabel2) ? CONFIG.agentLabel2 :""
         env.isWindows = isWindows() ? "true" :"false"
         env.IIS_FOLDER = !isEmpty(CONFIG.IIS_FOLDER) ? CONFIG.IIS_FOLDER :""
 
