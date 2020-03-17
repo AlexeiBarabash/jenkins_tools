@@ -12,7 +12,7 @@ def call(encryptWebconfig = true) {
     powershell "\$progressPreference = 'Continue';Expand-Archive ./Artifact.zip -DestinationPath ${env.IIS_FOLDER} -Force"
     if(encryptWebconfig) {
         textWithColor("encrypt webconfig")
-        powershell "C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\ASPNET_REGIIS.exe -pdf \"connectionStrings\" \"${env.IIS_FOLDER}\""
+        powershell 'C:\\Windows\\Microsoft.NET\\Framework\\v4.0.30319\\ASPNET_REGIIS.exe -pdf connectionStrings" ' + env.IIS_FOLDER.replace('/','\\')
         textWithColor("done encrypt webconfig")
     }
     textWithColor("DONE IIS_DownloadZipToWebsite", "green")
