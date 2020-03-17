@@ -75,5 +75,6 @@ def call(autoDetectEnv = false,autoDetectEnvFirstLetterUpper = false) {
     
     env.CONTAINER_NAME = "${env.CONTAINER_NAME}-${env.ENV}".replace("_", "-")
     env.CONTAINER_VERSION = "${(params.TAG_OR_BRANCH == null) ? BUILD_NUMBER : env.BRANCH_TO_CLONE}"
+    env.CONTAINER_VERSION = env.CONTAINER_VERSION.replace("/","-")
     env.CONTAINER_NAME_REPO = "${env.DOCKER_REPO}/${env.CONTAINER_NAME}:${env.CONTAINER_VERSION}"
 }
