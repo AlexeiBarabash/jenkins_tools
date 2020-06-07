@@ -4,7 +4,7 @@ def call(args = [], dockerFile = './Dockerfile', folder = '.') {
     textWithColor("Building Container")
     DOCKER_BUILD_ARGS = ''
     args.each { arg,value ->
-        DOCKER_BUILD_ARGS = "${DOCKER_BUILD_ARGS} --build-arg ${arg}=${value}"
+        DOCKER_BUILD_ARGS = "${DOCKER_BUILD_ARGS} --build-arg ${arg}=${value} -e ${arg}=${value}"
     }
     if(isWindows()) {
         powershell "docker build ${DOCKER_BUILD_ARGS} -t ${CONTAINER_NAME} -f ${dockerFile} ${folder}"
