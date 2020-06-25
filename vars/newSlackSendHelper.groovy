@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-def call(checkTriggered = false, ignoreResult = true) {
+def call(checkTriggered = false, ignoreResult = true, extraString = '') {
     try {
         textWithColor("newSlackSendHelper start")
         def success = currentBuild.result != 'FAILURE'
@@ -23,7 +23,7 @@ def call(checkTriggered = false, ignoreResult = true) {
             env.BUILDER_NAME = 'unknown'
         }
 
-        def title = " Job '${JOB_NAME} *[${env.BRANCH_TO_CLONE}]'* By *${env.BUILDER_NAME}*"
+        def title = " Job '${JOB_NAME} *[${env.BRANCH_TO_CLONE}]'* By *${env.BUILDER_NAME}* ${extraString}"
         textWithColor("get last commit")
         def text = (success ? "*SUCCESSFUL* -"  :  "*FAILED* - ${env.STAGE_NAME} -") + " ${env.LastCommit} \n ${env.LastCommitWithoutMerges}".replace("\n","\\n")
         text = text.trim().replace("\n","\\n").trim()
