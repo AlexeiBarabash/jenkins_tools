@@ -1,0 +1,31 @@
+@Library('jenkins-shared-lib')_
+env.SLACK_CH = 'eldan'
+pipeline {
+    agent { label params.agent_name }
+    options { ansiColor('xterm') }
+    stages {
+        stage('init') {
+            steps {
+                script {
+                    env.IIS_FOLDER = params.iis_folder
+                    env.ArtifactUrl = params.zip_url
+                    textWithColor(params.agent_name)
+                    textWithColor(env.IIS_FOLDER)
+                    textWithColor(env.ArtifactUrl)
+                }
+            }
+
+        }
+        stage('download zip and extract') {
+            steps {
+                IIS_DownloadZipToWebsite()    
+            }
+        }
+    }
+    post {
+        always { 
+            notifyHelper(true,false, "${params.agent_name} ${env.IIS_FOLDER.replace('\\', '/').split('/')[-1]}")
+            chuckNorris()
+        }
+    }
+}
